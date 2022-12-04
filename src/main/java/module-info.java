@@ -5,6 +5,4 @@ module com.example.gestion_college {
 
     opens com.example.gestion_college to javafx.fxml;
     exports com.example.gestion_college;
-    exports Controller;
-    opens Controller to javafx.fxml;
 }

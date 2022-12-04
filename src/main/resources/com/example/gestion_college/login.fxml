@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserLoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestion_college.UserLoginController">
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="311.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,7 +27,7 @@
                </image>
             </ImageView>
             <Label layoutX="96.0" layoutY="303.0" text="You don't have an account?" />
-            <Button layoutX="119.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #0596ff;" text="Register" textFill="WHITE">
+            <Button layoutX="119.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #0596ff;" text="Register" onAction="#ToRegister" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

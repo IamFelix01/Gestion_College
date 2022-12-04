@@ -1,5 +1,4 @@
 package com.example.gestion_college;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
