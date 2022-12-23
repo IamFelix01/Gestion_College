@@ -15,13 +15,13 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="311.0" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField layoutX="92.0" layoutY="228.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0596ff; -fx-border-width: 0px 0px 2px;" />
-            <TextField layoutX="92.0" layoutY="188.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #0596ff; -fx-border-width: 0px 0px 2px;" />
-            <Button layoutX="119.0" layoutY="269.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #0596ff;" text="Login" textFill="WHITE">
+            <PasswordField layoutX="92.0" layoutY="228.0" fx:id="tf_password" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0596ff; -fx-border-width: 0px 0px 2px;" />
+            <TextField layoutX="92.0" layoutY="188.0" fx:id="tf_username" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #0596ff; -fx-border-width: 0px 0px 2px;" />
+            <Button layoutX="119.0" layoutY="269.0" fx:id="button_login" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #0596ff;" text="Login" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <ImageView fitHeight="150.0" fitWidth="247.0" layoutX="32.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0"  fitWidth="247.0" layoutX="32.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@login.png" />
                </image>

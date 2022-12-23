@@ -1,6 +1,7 @@
 module com.example.gestion_college {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.gestion_college to javafx.fxml;
