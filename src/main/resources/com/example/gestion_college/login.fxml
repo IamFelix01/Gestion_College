@@ -17,7 +17,7 @@
          <children>
             <PasswordField layoutX="92.0" layoutY="228.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0596ff; -fx-border-width: 0px 0px 2px;" />
             <TextField layoutX="92.0" layoutY="188.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #0596ff; -fx-border-width: 0px 0px 2px;" />
-            <Button layoutX="119.0" layoutY="269.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #0596ff;" text="Login" textFill="WHITE">
+            <Button fx:id="loginBtn" layoutX="119.0" layoutY="269.0" mnemonicParsing="false" onAction="#ToLogin" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #0596ff;" text="Login" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -27,7 +27,7 @@
                </image>
             </ImageView>
             <Label layoutX="96.0" layoutY="303.0" text="You don't have an account?" />
-            <Button layoutX="119.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #0596ff;" text="Register" onAction="#ToRegister" textFill="WHITE">
+            <Button layoutX="119.0" layoutY="327.0" mnemonicParsing="false" onAction="#ToRegister" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #0596ff;" text="Register" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

@@ -1,12 +1,55 @@
 package Classes;
 
-import java.util.ArrayList;
+import com.example.gestion_college.Classe;
+import com.example.gestion_college.Enseignant;
+import com.example.gestion_college.Etudiant;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Test {
+    public static Connection getConnection() throws Exception {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:8012/college", "root","");
+
+            System.out.println("Connected Now");
+            return conn;
+
+        }catch(Exception e) {
+            System.out.println("Something is gone wrong error: " + e);
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
+        try {
+            Connection connect = getConnection();
+            Etudiant studentD;
+//            PreparedStatement prepare = connect.prepareStatement(sql);
+//            ResultSet result = prepare.executeQuery();
+//
+//            while (result.next()) {
+//                studentD = new Etudiant(result.getInt("id"),
+//                        result.getString("nom"),
+//                        result.getString("prenom"),
+//                        result.getDate("dateNaiss"),
+//                        result.getString("sexe"),
+//                        result.getString("niveau"),
+//                        result.getString("Classe"),
+//                        result.getString("massar")
+//                );
+//
+//            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         int[] temps = {8,10,14,16};
         Salle salle1 = new Salle(1,"science");
         Salle[] salles = {salle1, new Salle(2,"sport"),new Salle(3,"science"),new Salle(4,"science")};

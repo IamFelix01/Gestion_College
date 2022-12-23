@@ -1,7 +1,9 @@
 package Classes;
 
+import com.example.gestion_college.Classe;
+import com.example.gestion_college.Enseignant;
+
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Cours {
 

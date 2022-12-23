@@ -1,4 +1,4 @@
-package Classes;
+package com.example.gestion_college;
 
 import java.util.Date;
 
