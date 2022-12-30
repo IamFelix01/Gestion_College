@@ -13,11 +13,11 @@
     <children>
         <AnchorPane prefHeight="324.0" prefWidth="1030.0">
             <children>
-                <TextField layoutX="105.0" layoutY="22.0" promptText="search" />
+                <TextField fx:id="addCours_search" layoutX="105.0" layoutY="22.0" onKeyPressed="#addCoursSearch" onKeyTyped="#addCoursSearch" promptText="search" />
                 <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />
                 <TableView fx:id="addCours_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addCoursSelect" prefHeight="200.0" prefWidth="931.0">
                     <columns>
-                        <TableColumn fx:id="addCours_col_id" prefWidth="97.0" text="Id etudiant" />
+                        <TableColumn fx:id="addCours_col_id" prefWidth="97.0" text="Id Cours" />
                         <TableColumn fx:id="addCours_col_nom" prefWidth="107.0" text="Nom du Cous" />
                         <TableColumn fx:id="addCours_col_hd" prefWidth="119.0" text="Heure Debut" />
                         <TableColumn fx:id="addCours_col_hf" prefWidth="134.0" text="Heure Fin" />

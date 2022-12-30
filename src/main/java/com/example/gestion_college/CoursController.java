@@ -2,6 +2,8 @@ package com.example.gestion_college;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,25 +37,25 @@ public class CoursController implements Initializable {
     private TextField addCours_classe;
 
     @FXML
-    private TableColumn<?, ?> addCours_col_classe;
+    private TableColumn<Cours, String > addCours_col_classe;
 
     @FXML
-    private TableColumn<?, ?> addCours_col_ens;
+    private TableColumn<Cours, String > addCours_col_ens;
 
     @FXML
-    private TableColumn<?, ?> addCours_col_hd;
+    private TableColumn<Cours, String > addCours_col_hd;
 
     @FXML
-    private TableColumn<?, ?> addCours_col_hf;
+    private TableColumn<Cours, String > addCours_col_hf;
 
     @FXML
-    private TableColumn<?, ?> addCours_col_id;
+    private TableColumn<Cours, String > addCours_col_id;
 
     @FXML
-    private TableColumn<?, ?> addCours_col_nom;
+    private TableColumn<Cours, String > addCours_col_nom;
 
     @FXML
-    private TableColumn<?, ?> addCours_col_salle;
+    private TableColumn<Cours, String > addCours_col_salle;
 
     @FXML
     private TextField addCours_ens;
@@ -72,6 +74,10 @@ public class CoursController implements Initializable {
 
     @FXML
     private TableView<Cours> addCours_tableView;
+
+    @FXML
+    private TextField addCours_search;
+
     
     
     private Connection connect;
@@ -112,7 +118,7 @@ public class CoursController implements Initializable {
 
     }
 
-    private ObservableList<Cours> addCoursListD;
+    private ObservableList<Cours> addCoursListD = FXCollections.observableArrayList();
 
     public void addCoursShowListData() {
         addCoursListD = addCoursListData();
@@ -320,6 +326,44 @@ public class CoursController implements Initializable {
     }
 
 
+    public void addCoursSearch() {
+
+        FilteredList<Cours> filter = new FilteredList<>(addCoursListD, e -> true);
+
+        addCours_search.textProperty().addListener((Observable, oldValue, newValue) -> {
+
+            filter.setPredicate(predicateCours -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String searchKey = newValue.toLowerCase();
+
+                if (String.valueOf(predicateCours.getId()).contains(searchKey)) {
+                    return true;
+                } else if (String.valueOf(predicateCours.getHeureDebut()).contains(searchKey)) {
+                    return true;
+                } else if (String.valueOf(predicateCours.getHeureFin()).contains(searchKey)) {
+                    return true;
+                } else if (predicateCours.getEnseignant().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateCours.getClasse().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateCours.getNom().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else return predicateCours.getSalle().contains(searchKey);
+            });
+        });
+
+        SortedList<Cours> sortList = new SortedList<>(filter);
+
+        sortList.comparatorProperty().bind(addCours_tableView.comparatorProperty());
+        addCours_tableView.setItems(sortList);
+
+    }
+
+
     public static Connection getConnection() throws Exception {
         try {
             String driver  = "com.mysql.jdbc.Driver";
@@ -357,6 +401,7 @@ public class CoursController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addCoursShowListData();
+        addCoursSearch();
         Xbtn.setStyle("-fx-background-color: null;");
         Mbtn.setStyle("-fx-background-color: null;");
     }

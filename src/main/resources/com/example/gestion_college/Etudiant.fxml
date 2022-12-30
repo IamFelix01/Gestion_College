@@ -15,7 +15,7 @@
     <children>
         <AnchorPane prefHeight="324.0" prefWidth="1030.0">
             <children>
-                <TextField layoutX="105.0" layoutY="22.0" promptText="search" />
+                <TextField fx:id="addStudents_search" layoutX="105.0" layoutY="22.0" onKeyTyped="#addStudentsSearch" promptText="search" />
                 <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />
                 <TableView fx:id="addStudents_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addStudentsSelect" prefHeight="200.0" prefWidth="931.0">
                     <columns>
@@ -39,6 +39,7 @@
                         <Font name="System Bold" size="33.0" />
                     </font>
                 </Button>
+            <Button layoutX="273.0" layoutY="20.0" mnemonicParsing="false" onAction="#addStudentsSearch" text="Button" />
             </children>
         </AnchorPane>
         <Label layoutX="68.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="id etudiant :" />
