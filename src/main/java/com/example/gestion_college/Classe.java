@@ -3,29 +3,45 @@ package com.example.gestion_college;
 import java.util.ArrayList;
 
 public class Classe {
-    private int idClasse;
-    private String nomClasse;
+    private int id;
+    private String nom;
+    private String niveau;
+
+    public Classe(int id, String nom, String niveau) {
+        this.id = id;
+        this.nom = nom;
+        this.niveau = niveau;
+    }
+
     ArrayList<Classe> classes = new ArrayList<Classe>();
 
-    public Classe(int idClasse, String nomClasse) {
-        this.idClasse = idClasse;
-        this.nomClasse = nomClasse;
+    public Classe(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
     }
 
-    public int getIdClasse() {
-        return idClasse;
+    public String getNiveau() {
+        return niveau;
     }
 
-    public void setIdClasse(int idClasse) {
-        this.idClasse = idClasse;
+    public void setNiveau(String niveau) {
+        this.niveau = niveau;
     }
 
-    public String getNomClasse() {
-        return nomClasse;
+    public int getId() {
+        return id;
     }
 
-    public void setNomClasse(String nomClasse) {
-        this.nomClasse = nomClasse;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public void ajouterClasse(Classe classe){

@@ -59,12 +59,12 @@
                                 <FontAwesomeIconView fill="#2670dd" glyphName="HOME" size="50" />
                             </graphic>
                         </Button>
-                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Emploi" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToCours" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Emploi" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <graphic>
                                 <FontAwesomeIconView fill="#2670dd" glyphName="CALENDAR" size="50" />
                             </graphic>
                         </Button>
-                        <Button fx:id="nivBtn" contentDisplay="TOP" layoutX="273.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToNiv" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Classes" GridPane.rowIndex="1">
+                        <Button fx:id="nivBtn" contentDisplay="TOP" layoutX="273.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToNiv" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Classes &amp; Niveau" GridPane.rowIndex="1">
                             <graphic>
                                 <FontAwesomeIconView fill="#2670dd" glyphName="INDENT" size="50" />
                             </graphic>
@@ -74,7 +74,7 @@
                                 <FontAwesomeIconView fill="#2670dd" glyphName="GROUP" size="50" text="" />
                             </graphic>
                         </Button>
-                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="149.0" mnemonicParsing="false" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Salles" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="salleBtn" contentDisplay="TOP" layoutX="10.0" layoutY="149.0" mnemonicParsing="false" onAction="#ToSalle" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Salles et Materiels" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <graphic>
                                 <FontAwesomeIconView fill="#2670dd" glyphName="HOME" size="50" />
                             </graphic>

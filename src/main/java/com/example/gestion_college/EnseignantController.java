@@ -73,7 +73,7 @@ public class EnseignantController implements Initializable {
     private TextField addProfs_prenom;
 
     @FXML
-    private ComboBox<?> addProfs_sexe;
+    private ComboBox<String> addProfs_sexe;
 
     @FXML
     private TableView<Enseignant> addProfs_tableView;
@@ -179,7 +179,7 @@ public class EnseignantController implements Initializable {
         addProfs_prenom.setText(profD.getPrenom());
         addProfs_classe.setText(profD.getClasse());
         addProfs_matiere.setText(profD.getMatiere());
-        //addProfs_niv.setSelectionModel(profD.getNiveau());
+        addProfs_sexe.setValue(profD.getSexe());
         addProfs_contact.setText(profD.getContact());
 
 

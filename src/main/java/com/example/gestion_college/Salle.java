@@ -1,16 +1,18 @@
-package Classes;
+package com.example.gestion_college;
 
 import java.util.ArrayList;
 
 public class Salle {
     private static int i = 0;
-    private int idSalle;
-    private String typeSalle;
+    private int id;
+    private String type;
+    //Materiels
     ArrayList<Salle> salles = new ArrayList<Salle>();
 
-    public Salle(int idSalle, String typeSalle) {
-        this.idSalle = idSalle;
-        this.typeSalle = typeSalle;
+
+    public Salle(int id, String type) {
+        this.id = id;
+        this.type = type;
     }
 
 
@@ -22,20 +24,20 @@ public class Salle {
         Salle.i = i;
     }
 
-    public int getIdSalle() {
-        return idSalle;
+    public int getId() {
+        return id;
     }
 
-    public void setIdSalle(int idSalle) {
-        this.idSalle = idSalle;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTypeSalle() {
-        return typeSalle;
+    public String getType() {
+        return type;
     }
 
-    public void setTypeSalle(String typeSalle) {
-        this.typeSalle = typeSalle;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void ajouterSalle(Salle salle){

@@ -63,9 +63,9 @@ public class EtudiantController implements Initializable {
     private DatePicker addStudents_dateNaiss;
 
     @FXML
-    private ComboBox<?> addStudents_niv;
+    private ComboBox<String> addStudents_niv;
     @FXML
-    private ComboBox<?> addStudents_sexe;
+    private ComboBox<String> addStudents_sexe;
 
 
     @FXML
@@ -177,7 +177,8 @@ public class EtudiantController implements Initializable {
         addStudents_prenom.setText(studentD.getPrenom());
         addStudents_classe.setText(studentD.getClasse());
         addStudents_massar.setText(studentD.getMassar());
-        //addStudents_niv.setSelectionModel(studentD.getNiveau());
+        addStudents_sexe.setValue(studentD.getSexe());
+        addStudents_niv.setValue(studentD.getNiveau());
         addStudents_dateNaiss.setValue(LocalDate.parse(String.valueOf(studentD.getDateNaiss())));
 
 
@@ -186,8 +187,6 @@ public class EtudiantController implements Initializable {
     public void ajouterEtudiant() {
 
         String insertData = "INSERT INTO etudiant (id, nom,prenom, sexe, dateNaiss, niveau, Classe,massar) VALUES(?,?,?,?,?,?,?,?)";
-
-
 
         try {
             connect = getConnection();
