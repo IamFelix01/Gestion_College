@@ -1,30 +1,28 @@
-package Classes;
+package com.example.gestion_college;
 
 import java.util.Date;
 
 public class Etudiant {
-    private  int id;
     private String nom;
     private String prenom;
     private Date dateNaiss;
     private String sexe;
     private String niveau;
     private String Classe;
-    private String massar;
+    private String CNE;
 
-    public Etudiant(int id, String nom, String prenom, Date dateNaiss, String sexe, String niveau, String classe, String massar) {
-        this.id = id;
+    public Etudiant(String CNE, String nom, String prenom, Date dateNaiss, String sexe, String niveau, String classe) {
+        this.CNE = CNE;
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaiss = dateNaiss;
         this.sexe = sexe;
         this.niveau = niveau;
-        Classe = classe;
-        this.massar = massar;
+        this.Classe = classe;
     }
 
-    public int getId() {
-        return id;
+    public String getCNE() {
+        return CNE;
     }
 
     public String getNom() {
@@ -51,7 +49,4 @@ public class Etudiant {
         return Classe;
     }
 
-    public String getMassar() {
-        return massar;
-    }
 }

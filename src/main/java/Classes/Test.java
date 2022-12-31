@@ -1,6 +1,10 @@
 package Classes;
 
-import java.util.ArrayList;
+import com.example.gestion_college.Classe;
+import com.example.gestion_college.Cours;
+import com.example.gestion_college.Enseignant;
+import com.example.gestion_college.Salle;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 

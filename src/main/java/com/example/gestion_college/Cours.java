@@ -1,7 +1,6 @@
-package Classes;
+package com.example.gestion_college;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Cours {
 
