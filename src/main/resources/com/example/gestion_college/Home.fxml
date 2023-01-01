@@ -59,9 +59,9 @@
                                 <FontAwesomeIconView fill="#2670dd" glyphName="HOME" size="50" />
                             </graphic>
                         </Button>
-                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToCours" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Emploi" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToCours" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Cours" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <graphic>
-                                <FontAwesomeIconView fill="#2670dd" glyphName="CALENDAR" size="50" />
+                                <FontAwesomeIconView fill="#2670dd" glyphName="BOOK" size="50" />
                             </graphic>
                         </Button>
                         <Button fx:id="nivBtn" contentDisplay="TOP" layoutX="273.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToNiv" prefHeight="145.0" prefWidth="263.0" styleClass="buttom" stylesheets="@../../../../java/com/example/gestion_college/style.css" text="Classes &amp; Niveau" GridPane.rowIndex="1">
