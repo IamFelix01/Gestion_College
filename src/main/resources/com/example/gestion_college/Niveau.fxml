@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,35 +10,74 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestion_college.NiveauController">
-    <children>
-        <AnchorPane prefHeight="324.0" prefWidth="1030.0">
-            <children>
-                <TextField layoutX="105.0" layoutY="22.0" promptText="search" />
-<!--                <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />-->
-                <TableView fx:id="addProfs_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addProfsSelect" prefHeight="200.0" prefWidth="370.0">
-                    <columns>
-                        <TableColumn fx:id="addProfs_col_profNum" prefWidth="129.0" text="ID Niveau" />
-                        <TableColumn fx:id="addProfs_col_lastName" prefWidth="238.0" text="Nom" />
-                    </columns>
-                </TableView>
-                <Button fx:id="Xbtn" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" text="X">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Button>
-                <Button fx:id="Mbtn" layoutX="898.0" layoutY="-5.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="28.0" text="-">
-                    <font>
-                        <Font name="System Bold" size="33.0" />
-                    </font>
-                </Button>
-            </children>
-        </AnchorPane>
-        <Label layoutX="68.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="ID Niveau" />
-        <TextField fx:id="addProfs_ID" layoutX="151.0" layoutY="330.0" />
-        <Label layoutX="68.0" layoutY="379.0" prefHeight="18.0" prefWidth="71.0" text="nom:" />
-        <TextField fx:id="addProfs_nom" layoutX="151.0" layoutY="376.0" />
-        <Button layoutX="321.0" layoutY="439.0" mnemonicParsing="false" onAction="#ajouterNiveau" prefHeight="30.0" prefWidth="85.0" text="ajouter" />
-        <Button layoutX="109.0" layoutY="439.0" mnemonicParsing="false" onAction="#addProfsClear" prefHeight="30.0" prefWidth="85.0" text="Vider" />
-        <Button layoutX="215.0" layoutY="439.0" mnemonicParsing="false" onAction="#addProfsUpdate" prefHeight="30.0" prefWidth="85.0" text="MAJ" />
-    </children>
+    <AnchorPane prefHeight="324.0" prefWidth="1030.0">
+        <TextField fx:id="classe_id" layoutX="663.0" layoutY="313.0" />
+        <TextField layoutX="105.0" layoutY="22.0" promptText="search" />
+        <!--                <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />-->
+        <TableView fx:id="Niveau_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addProfsSelect" prefHeight="200.0" prefWidth="370.0">
+            <columns>
+                <TableColumn fx:id="niveau_col_code_niveau" prefWidth="129.0" text="Code Niveau" />
+                <TableColumn fx:id="niveau_col_nom" prefWidth="238.0" text="Nom" />
+            </columns>
+        </TableView>
+        <Button fx:id="Xbtn" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" text="X">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Button fx:id="Mbtn" layoutX="898.0" layoutY="-5.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="28.0" text="-">
+            <font>
+                <Font name="System Bold" size="33.0" />
+            </font>
+        </Button>
+        <TableView fx:id="Classe_Table" layoutX="564.0" layoutY="68.0" onMouseClicked="#ClasseOnSelect" prefHeight="206.0" prefWidth="334.0">
+            <columns>
+                <TableColumn fx:id="classe_col_classeID" prefWidth="76.0" text="ID" />
+                <TableColumn fx:id="classe_col_classeName" minWidth="0.0" prefWidth="123.0" text="Classe" />
+                <TableColumn fx:id="classe_col_NiveauName" maxWidth="400.0" minWidth="100.0" prefWidth="134.0" text="Niveau" />
+            </columns>
+        </TableView>
+        <Label layoutX="585.0" layoutY="317.0" text="Classe Id" />
+    </AnchorPane>
+    <Label layoutX="54.0" layoutY="333.0" prefHeight="18.0" prefWidth="85.0" text="Code Niveau" />
+<!--    <TextField fx:id="code_niveau" layoutX="151.0" layoutY="330.0" />-->
+    <Label layoutX="68.0" layoutY="379.0" prefHeight="18.0" prefWidth="71.0" text="Nom" />
+    <TextField fx:id="niveau_nom" layoutX="151.0" layoutY="376.0" />
+    <TextField fx:id="classe_name" layoutX="663.0" layoutY="353.0" />
+    <Label layoutX="566.0" layoutY="353.0" text="Classe Name" />
+    <Button layoutX="349.0" layoutY="439.0" mnemonicParsing="false" onAction="#ajouterNiveau" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #afd69b;" text="ADD" textFill="WHITE">
+        <font>
+            <Font name="Elephant" size="12.0" />
+        </font>
+    </Button>
+    <Button layoutX="26.0" layoutY="439.0" mnemonicParsing="false" onAction="#NiveausClear" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #8B8B8B;" text="Vider" textFill="#fcfcfc" />
+    <Button layoutX="236.0" layoutY="439.0" mnemonicParsing="false" onAction="#UpdateNiveau" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #EFD033;" text="Update" textFill="WHITE">
+        <font>
+            <Font name="Elephant" size="12.0" />
+        </font>
+    </Button>
+    <Button layoutX="130.0" layoutY="439.0" mnemonicParsing="false" onAction="#DeleteNiveau" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+        <font>
+            <Font name="Elephant" size="12.0" />
+        </font>
+    </Button>
+   <Label layoutX="568.0" layoutY="393.0" text="Code Niveau" />
+   <Button layoutX="846.0" layoutY="439.0" mnemonicParsing="false" onAction="#AjouterClasse" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #afd69b;" text="ADD" textFill="WHITE">
+      <font>
+         <Font name="Elephant" size="12.0" />
+      </font>
+   </Button>
+   <Button layoutX="739.0" layoutY="439.0" mnemonicParsing="false" onAction="#UpdateClasse" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #EFD033;" text="Update" textFill="WHITE">
+      <font>
+         <Font name="Elephant" size="12.0" />
+      </font>
+   </Button>
+   <Button layoutX="630.0" layoutY="439.0" mnemonicParsing="false" onAction="#DeleteClasse" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+      <font>
+         <Font name="Elephant" size="12.0" />
+      </font>
+   </Button>
+   <Button layoutX="524.0" layoutY="439.0" mnemonicParsing="false" onAction="#ClasseClear" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #8B8B8B;" text="Vider" textFill="#fcfcfc" />
+   <ComboBox fx:id="combo_code_niv" layoutX="663.0" layoutY="393.0" prefWidth="150.0" />
+   <TextField fx:id="code_niveau" layoutX="151.0" layoutY="329.0" />
 </AnchorPane>

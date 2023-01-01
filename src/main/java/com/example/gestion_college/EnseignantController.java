@@ -19,10 +19,7 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class EnseignantController implements Initializable {
     private Stage stage;
@@ -73,7 +70,7 @@ public class EnseignantController implements Initializable {
     private TextField addProfs_prenom;
 
     @FXML
-    private ComboBox<?> addProfs_sexe;
+    private ComboBox<String> addProfs_sexe;
 
     @FXML
     private TableView<Enseignant> addProfs_tableView;
@@ -121,9 +118,9 @@ public class EnseignantController implements Initializable {
         addProfs_col_profNum.setCellValueFactory(new PropertyValueFactory<>("id"));
         addProfs_col_firstName.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         addProfs_col_lastName.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        addProfs_col_gender.setCellValueFactory(new PropertyValueFactory<>("sexe"));
+        addProfs_col_gender.setCellValueFactory(new PropertyValueFactory<>("Sexe"));
         addProfs_col_Contact.setCellValueFactory(new PropertyValueFactory<>("Contact"));
-        addProfs_col_matiere.setCellValueFactory(new PropertyValueFactory<>("matiere"));
+        addProfs_col_matiere.setCellValueFactory(new PropertyValueFactory<>("Matiere"));
         addProfs_col_classe.setCellValueFactory(new PropertyValueFactory<>("Classe"));
 
         addProfs_tableView.setItems(addProfsListD);
@@ -146,17 +143,13 @@ public class EnseignantController implements Initializable {
 //
 //    }
 
-    private final String[] SexeList = {"Homme", "Femme"};
+
 
     public void addProfsSexeList() {
+        String[] SexeList = {"Homme", "Femme"};
+        List<String> SexeL = new ArrayList<>(Arrays.asList(SexeList));
 
-         ArrayList<String> SexeL = new ArrayList<>();
-
-        for (String data : SexeList) {
-            SexeL.add(data);
-        }
-
-        ObservableList ObList = FXCollections.observableArrayList(SexeL);
+        ObservableList<String> ObList = FXCollections.observableArrayList(SexeL);
         addProfs_sexe.setItems(ObList);
 
     }
@@ -177,7 +170,8 @@ public class EnseignantController implements Initializable {
         addProfs_prenom.setText(profD.getPrenom());
         addProfs_classe.setText(profD.getClasse());
         addProfs_matiere.setText(profD.getMatiere());
-        //addProfs_niv.setSelectionModel(profD.getNiveau());
+        addProfs_sexe.setValue(profD.getSexe());
+//        addProfs_n.setSelectionModel(profD.getNiveau());
         addProfs_contact.setText(profD.getContact());
 
 
@@ -244,7 +238,20 @@ public class EnseignantController implements Initializable {
 //        return null;
 //    }
 
-
+//DELETE ENSEIGNANT
+public void DeleteEnseignant(){
+    int id_prof = Integer.parseInt(addProfs_ID.getText());
+    String nom = addProfs_nom.getText();
+    String prenom = addProfs_prenom.getText();
+    if(EnseignantModel.DeleteEnseignant(id_prof,nom,prenom)){
+        addProfsShowListData();
+        // TO CLEAR THE FIELDS
+        addProfsClear();
+        addProfsClear();
+    } else {
+        System.out.println("Failed To Delete ... returns false");
+    }
+}
 
 
 

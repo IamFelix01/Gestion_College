@@ -1,27 +1,31 @@
 package com.example.gestion_college;
 
-public class Niveau {
-    private int id;
-    private String nom;
+import java.util.ArrayList;
 
-    public Niveau(int id, String nom) {
-        this.id = id;
+public class Niveau {
+    private String code_niveau;
+    private String nom;
+    private ArrayList<Classe> classes=new ArrayList<>();
+    public Niveau(String code_niveau){
+        this.code_niveau=code_niveau;
+    }
+    public Niveau(String code_niveau, String nom) {
+        this.code_niveau = code_niveau;
         this.nom = nom;
     }
-
-    public int getId() {
-        return id;
+    public void addClasse(Classe classe){
+        classes.add(classe);
+    }
+    public ArrayList<Classe> GetClasses(){
+        return classes;
+    }
+    public String getCode_niveau() {
+        return code_niveau;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
 }

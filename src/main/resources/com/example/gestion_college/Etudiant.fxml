@@ -19,10 +19,10 @@
 <!--                <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />-->
                 <TableView fx:id="addStudents_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addStudentsSelect" prefHeight="200.0" prefWidth="931.0">
                     <columns>
-                        <TableColumn fx:id="addStudents_col_studentNum" prefWidth="163.0" text="cne" />
+                        <TableColumn fx:id="addStudents_col_cne" prefWidth="163.0" text="CNE" />
                         <TableColumn fx:id="addStudents_col_lastName" prefWidth="112.0" text="Nom" />
-                        <TableColumn fx:id="addStudents_col_firstName" prefWidth="122.0" text="prenom" />
-                        <TableColumn fx:id="addStudents_col_birth" prefWidth="176.0" text="date de naissanece" />
+                        <TableColumn fx:id="addStudents_col_firstName" prefWidth="122.0" text="Prenom" />
+                        <TableColumn fx:id="addStudents_col_birth" prefWidth="176.0" text="Date De Naissanece" />
                         <TableColumn fx:id="addStudents_col_gender" minWidth="0.0" prefWidth="100.0" text="Sexe" />
                         <TableColumn fx:id="addStudents_col_niv" minWidth="0.0" prefWidth="125.0" text="Niveau" />
                         <TableColumn fx:id="addStudents_col_classe" minWidth="0.0" prefWidth="132.0" text="Classe" />
@@ -46,8 +46,8 @@
             </Text>
             </children>
         </AnchorPane>
-        <Label layoutX="68.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="id etudiant :" />
-        <TextField fx:id="addStudents_ID" layoutX="151.0" layoutY="330.0" />
+        <Label layoutX="68.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="CNE etudiant :" />
+        <TextField fx:id="addStudents_CNE" layoutX="151.0" layoutY="330.0" />
         <Label layoutX="68.0" layoutY="379.0" prefHeight="18.0" prefWidth="71.0" text="nom:" />
         <TextField fx:id="addStudents_nom" layoutX="151.0" layoutY="376.0" />
         <Label layoutX="68.0" layoutY="429.0" prefHeight="18.0" prefWidth="71.0" text="prenom:" />
@@ -59,9 +59,20 @@
         <ComboBox fx:id="addStudents_sexe" layoutX="440.0" layoutY="428.0" onAction="#addStudentsSexeList" prefWidth="150.0" />
         <Label layoutX="636.0" layoutY="332.0" prefHeight="18.0" prefWidth="140.0" text="Date de naissanece :" />
         <DatePicker fx:id="addStudents_dateNaiss" layoutX="776.0" layoutY="329.0" />
-        <Button layoutX="913.0" layoutY="439.0" mnemonicParsing="false" onAction="#ajouterEtudiant" prefHeight="30.0" prefWidth="85.0" text="ajouter" />
+        <Button layoutX="934.0" layoutY="439.0" mnemonicParsing="false" onAction="#ajouterEtudiant" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #afd69b;" text="ADD" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font></Button>
         <ComboBox fx:id="addStudents_niv" layoutX="436.0" layoutY="330.0" onAction="#addStudentsYearList" prefWidth="150.0" />
-        <Button layoutX="706.0" layoutY="439.0" mnemonicParsing="false" onAction="#addStudentsClear" prefHeight="30.0" prefWidth="85.0" text="Vider" />
-        <Button layoutX="806.0" layoutY="439.0" mnemonicParsing="false" onAction="#addStudentsUpdate" prefHeight="30.0" prefWidth="85.0" text="MAJ" />
+        <Button layoutX="630.0" layoutY="439.0" mnemonicParsing="false" onAction="#addStudentsClear" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #8B8B8B;" text="Vider" textFill="#fcfcfc" />
+        <Button layoutX="838.0" layoutY="439.0" mnemonicParsing="false" onAction="#addStudentsUpdate" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #EFD033;" text="Update" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font></Button>
+        <Button layoutX="734.0" onAction="#DeleteEtudiant" layoutY="439.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>

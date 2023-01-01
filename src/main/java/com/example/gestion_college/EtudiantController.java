@@ -15,20 +15,19 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class EtudiantController implements Initializable {
+    public  TextField addStudents_CNE;
+    public TableColumn<Etudiant, String> addStudents_col_cne;
     private Stage stage;
     private Scene scene;
     @FXML
     private TableView<Etudiant> addStudents_tableView;
 
-    @FXML
-    private TableColumn<Etudiant, String> addStudents_col_studentNum;
+
 
     @FXML
     private TableColumn<Etudiant, String> addStudents_col_classe;
@@ -54,23 +53,23 @@ public class EtudiantController implements Initializable {
 //    @FXML
 //    private TableColumn<Etudiant, String> addStudents_col_massar;
 
+//    @FXML
+//    private TextField addStudents_ID;
     @FXML
-    private TextField addStudents_ID;
+    private  TextField addStudents_nom;
     @FXML
-    private TextField addStudents_nom;
+    private  TextField addStudents_prenom;
     @FXML
-    private TextField addStudents_prenom;
-    @FXML
-    private TextField addStudents_classe;
+    private  TextField addStudents_classe;
     @FXML
     private TextField addStudents_massar;
     @FXML
-    private DatePicker addStudents_dateNaiss;
+    private  DatePicker addStudents_dateNaiss;
 
     @FXML
-    private ComboBox<String> addStudents_niv;
+    private  ComboBox<String> addStudents_niv;
     @FXML
-    private ComboBox<String> addStudents_sexe;
+    private  ComboBox<String> addStudents_sexe;
 
 
     @FXML
@@ -83,6 +82,9 @@ public class EtudiantController implements Initializable {
     private Statement statement;
     private ResultSet result;
 
+
+
+
     //lister les etudiant de la bdd
     public ObservableList<Etudiant> addStudentListData(){
         ObservableList<Etudiant> listEtudiant = FXCollections.observableArrayList();
@@ -91,11 +93,10 @@ public class EtudiantController implements Initializable {
 
 
         try {
-            String sql = "SELECT * FROM ETUDIANT";
-            Connection connect = getConnection();
+            Connection connect = Connexion.getConnection();
             Etudiant studentD;
             assert connect != null;
-            PreparedStatement prepare = connect.prepareStatement(sql);
+            PreparedStatement prepare = connect.prepareStatement("select * from etudiant");
             ResultSet result = prepare.executeQuery();
 
             while (result.next()) {
@@ -118,6 +119,8 @@ public class EtudiantController implements Initializable {
         return listEtudiant;
 
     }
+
+    private static ObservableList<Etudiant> addStudentsListD ;
 
     public void addStudentsSearch() {
         System.out.println("add student search called");
@@ -157,12 +160,10 @@ public class EtudiantController implements Initializable {
 
     }
 
-    private ObservableList<Etudiant> addStudentsListD;
 
     public void addStudentsShowListData() {
         addStudentsListD = addStudentListData();
-
-        addStudents_col_studentNum.setCellValueFactory(new PropertyValueFactory<>("cne"));
+        addStudents_col_cne.setCellValueFactory(new PropertyValueFactory<>("CNE"));
         addStudents_col_firstName.setCellValueFactory(new PropertyValueFactory<>("nom"));
         addStudents_col_lastName.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         addStudents_col_gender.setCellValueFactory(new PropertyValueFactory<>("sexe"));
@@ -175,33 +176,25 @@ public class EtudiantController implements Initializable {
     }
 
     //add les niveaux au list
-    private String[] niveauList = {"1ERE", "2EME", "3EME"};
+    private final String[] niveauList = {"1ERE", "2EME", "3EME"};
 
     public void addStudentsYearList() {
 
-        List<String> yearL = new ArrayList<>();
+        List<String> yearL = new ArrayList<>(Arrays.asList(niveauList));
 
-        for (String data : niveauList) {
-            yearL.add(data);
-        }
-
-        ObservableList ObList = FXCollections.observableArrayList(yearL);
+        ObservableList<String> ObList = FXCollections.observableArrayList(yearL);
         addStudents_niv.setItems(ObList);
         addStudentsSearch();
 
     }
 
-    private String[] SexeList = {"Homme", "Femme"};
+    private final String[] SexeList = {"Homme", "Femme"};
 
     public void addStudentsSexeList() {
 
-        List<String> SexeL = new ArrayList<>();
+        List<String> SexeL = new ArrayList<>(Arrays.asList(SexeList));
 
-        for (String data : SexeList) {
-            SexeL.add(data);
-        }
-
-        ObservableList ObList = FXCollections.observableArrayList(SexeL);
+        ObservableList<String> ObList = FXCollections.observableArrayList(SexeL);
         addStudents_sexe.setItems(ObList);
 
     }
@@ -217,12 +210,11 @@ public class EtudiantController implements Initializable {
             return;
         }
 
-        addStudents_ID.setText(studentD.getCNE());
+        addStudents_CNE.setText(studentD.getCNE());
         addStudents_nom.setText(studentD.getNom());
         addStudents_prenom.setText(studentD.getPrenom());
         addStudents_sexe.setValue(studentD.getSexe());
         addStudents_dateNaiss.setValue(LocalDate.parse(String.valueOf(studentD.getDateNaiss())));
-        addStudentsSearch();
         addStudents_niv.setValue(studentD.getNiveau());
         addStudents_classe.setText(studentD.getClasse());
 
@@ -230,14 +222,13 @@ public class EtudiantController implements Initializable {
     }
 
     public void ajouterEtudiant() {
-        String cne = addStudents_ID.getText();
-        String nom = addStudents_nom.getText();
-        String prenom = addStudents_prenom.getText();
-        String sexe = (String) addStudents_sexe.getSelectionModel().getSelectedItem();
-        Date dateNaiss = Date.valueOf(addStudents_dateNaiss.getValue());
-        System.out.println("DateNaiss : "+dateNaiss);
-        String niveau = (String) addStudents_sexe.getSelectionModel().getSelectedItem();
-        String classe = addStudents_classe.getText();
+         String cne = addStudents_CNE.getText();
+         String nom = addStudents_nom.getText();
+         String prenom = addStudents_prenom.getText();
+         String sexe = (String) addStudents_sexe.getSelectionModel().getSelectedItem();
+         Date dateNaiss = Date.valueOf(addStudents_dateNaiss.getValue());
+         String niveau = (String) addStudents_niv.getSelectionModel().getSelectedItem();
+         String classe = addStudents_classe.getText();
        if(EtudiantModel.AjouterEtudiant(cne,nom,prenom,sexe,dateNaiss,niveau,classe)) {
             // TO BECOME UPDATED OUR TABLEVIEW ONCE THE DATA WE GAVE SUCCESSFUL
             addStudentsShowListData();
@@ -252,7 +243,7 @@ public class EtudiantController implements Initializable {
     }
 
     public void addStudentsClear() {
-        addStudents_ID.setText("");
+        addStudents_CNE.setText("");
         addStudents_sexe.getSelectionModel().clearSelection();
         addStudents_niv.getSelectionModel().clearSelection();
         addStudents_prenom.setText("");
@@ -264,87 +255,39 @@ public class EtudiantController implements Initializable {
     }
 
     public void addStudentsUpdate() {
-
-        String updateData = "UPDATE etudiant SET "
-                + "id = '" + addStudents_ID.getText()
-                + "', nom = '" + addStudents_nom.getText()
-                + "', prenom = '" + addStudents_prenom.getText()
-                + "', sexe = '" + addStudents_sexe.getSelectionModel().getSelectedItem()
-                + "', dateNaiss = '" + addStudents_dateNaiss.getValue()
-                + "', niveau = '" + addStudents_niv.getSelectionModel().getSelectedItem()
-                + "', classe = '" + addStudents_classe.getText()
-                + "', massar = '" + addStudents_massar.getText() + "' WHERE id = '"
-                + addStudents_ID.getText() + "'";
-
-
-
-
-        try {
-            connect = getConnection();
-            Alert alert;
-            if (addStudents_ID.getText().isEmpty()
-                    || addStudents_nom.getText().isEmpty()
-                    || addStudents_prenom.getText().isEmpty()
-                    || addStudents_niv.getSelectionModel().getSelectedItem() == null
-                    || addStudents_classe.getText().isEmpty()
-                    || addStudents_sexe.getSelectionModel().getSelectedItem() == null
-                    || addStudents_dateNaiss.getValue() == null
-                    || addStudents_massar.getText().isEmpty()){
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("SVP completer tous les champs");
-                alert.showAndWait();
-            } else {
-
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation Message");
-                alert.setHeaderText(null);
-                alert.setContentText("etes-vous sure pour modifier " + addStudents_ID.getText() + "?");
-                Optional<ButtonType> option = alert.showAndWait();
-
-                if (option.get().equals(ButtonType.OK)) {
-                    statement = connect.createStatement();
-                    statement.executeUpdate(updateData);
-
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully Updated!");
-                    alert.showAndWait();
-
-                    // TO UPDATE THE TABLEVIEW
-                    addStudentsShowListData();
-                    // TO CLEAR THE FIELDS
-                    addStudentsClear();
-
-                } else {
-                    return;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        String cne = addStudents_CNE.getText();
+        String nom = addStudents_nom.getText();
+        String prenom = addStudents_prenom.getText();
+        String sexe = (String) addStudents_sexe.getSelectionModel().getSelectedItem();
+        Date dateNaiss = Date.valueOf(addStudents_dateNaiss.getValue());
+        String niveau = (String) addStudents_niv.getSelectionModel().getSelectedItem();
+        String classe = addStudents_classe.getText();
+        if(EtudiantModel.UpdateEtudiant(cne,nom,prenom,sexe,dateNaiss,niveau,classe)){
+            // TO UPDATE THE TABLEVIEW
+            addStudentsShowListData();
+            // TO CLEAR THE FIELDS
+            addStudentsClear();
+            addStudentsSearch();
+        } else {
+            System.out.println("Failed To Update ... returns false");
         }
-        addStudentsSearch();
+
+
     }
 
-
-    public static Connection getConnection() throws Exception {
-        try {
-            String driver  = "com.mysql.jdbc.Driver";
-            String url = "jdbc:mysql://127.0.0.1:3306/college";
-            String user = "root";
-            String pass = "root";
-            Class.forName(driver);
-
-            Connection conn = DriverManager.getConnection(url,user,pass);
-            System.out.println("Connected Now");
-            return conn;
-
-        }catch(Exception e) {
-            System.out.println("Something is gone wrong error: " + e);
+    //DELETE STUDENT
+    public void DeleteEtudiant(){
+        String cne = addStudents_CNE.getText();
+        String nom = addStudents_nom.getText();
+        String prenom = addStudents_prenom.getText();
+        if(EtudiantModel.DeleteEtudiant(cne,nom,prenom)){
+            addStudentsShowListData();
+            // TO CLEAR THE FIELDS
+            addStudentsClear();
+            addStudentsSearch();
+        } else {
+            System.out.println("Failed To Delete ... returns false");
         }
-        return null;
     }
 
 

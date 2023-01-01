@@ -127,4 +127,46 @@ public class EnseignantModel {
         }
         return false;
     }
+    //DELETE ENSEIGNANT
+    public static boolean DeleteEnseignant(int id_prof,String nom,String prenom){
+        try {
+            connect = Connexion.getConnection();
+            Alert alert;
+            if (id_prof==0){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Remplir le champs de ID SVP!!!");
+                alert.showAndWait();
+            } else {
+
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Message");
+                alert.setHeaderText(null);
+                alert.setContentText("etes-vous sure pour Suprimer " + nom +" "+prenom+ "?");
+                Optional<ButtonType> option = alert.showAndWait();
+
+                if (option.get().equals(ButtonType.OK)) {
+                    prepare = connect.prepareStatement("Delete from enseignant where id_prof=?");
+                    prepare.setInt(1,id_prof);
+                    int resultset = prepare.executeUpdate();
+                    if(resultset == 1) {
+                        alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Information Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Successfully Deleted!");
+                        alert.showAndWait();
+                        return true;
+                    }
+
+
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

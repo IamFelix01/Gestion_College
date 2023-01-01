@@ -3,56 +3,37 @@ package com.example.gestion_college;
 import java.util.ArrayList;
 
 public class Classe {
-    private int idClasse;
-    private String nomClasse;
-    ArrayList<Classe> classes = new ArrayList<Classe>();
-
-    public Classe(int idClasse, String nomClasse) {
-        this.idClasse = idClasse;
-        this.nomClasse = nomClasse;
+    private int id;
+    private String nom;
+    private String code;
+    private Niveau niveau;
+    public Classe(int id,String nom){
+        this.id=id;
+        this.nom=nom;
+    }
+    public Classe(int id,String nom,Niveau niv){
+        this.id=id;
+        this.nom=nom;
+        this.niveau=niv;
+        this.code=niveau.getCode_niveau();
     }
 
-    public int getIdClasse() {
-        return idClasse;
+    public int getId() {
+        return id;
     }
 
-    public void setIdClasse(int idClasse) {
-        this.idClasse = idClasse;
+    public String getNom() {
+        return nom;
     }
 
-    public String getNomClasse() {
-        return nomClasse;
+    public String getCode() {
+        return code;
     }
 
-    public void setNomClasse(String nomClasse) {
-        this.nomClasse = nomClasse;
+    public Niveau getNiveau() {
+        return niveau;
     }
 
-    public void ajouterClasse(Classe classe){
-        if(!classes.contains(classe)){
-            classes.add(classe);
-        }
-        else{
-            System.out.println("deja inseré");
-        }
-    }
 
-    public void supprimerClasse(Classe classe){
-        if(classes.contains(classe)){
-            classes.remove(classe);
-        }
-        else{
-            System.out.println("deja inseré");
-        }
-    }
 
-    // a definir
-    public void modifierClasse(Classe classe){
-        if(classes.contains(classe)){
-            classes.remove(classe);
-        }
-        else{
-            System.out.println("deja inseré");
-        }
-    }
 }
