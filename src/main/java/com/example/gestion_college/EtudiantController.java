@@ -113,51 +113,22 @@ public class EtudiantController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //addStudentsSearch();
+        //
         return listEtudiant;
 
     }
 
-    public void addStudentsSearch() {
-        System.out.println("Works");
-
-        FilteredList<Etudiant> filter = new FilteredList<>(addStudentsListD, e -> true);
-
-        addStudents_search.textProperty().addListener((Observable, oldValue, newValue) -> {
-
-            filter.setPredicate(predicateStudentData -> {
-
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                String searchKey = newValue.toLowerCase();
-
-                if (predicateStudentData.getClasse().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getPrenom().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getNom().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getMassar().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getSexe().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getDateNaiss().toString().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getNiveau().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        });
-
-        SortedList<Etudiant> sortList = new SortedList<>(filter);
-
-        sortList.comparatorProperty().bind(addStudents_tableView.comparatorProperty());
-        addStudents_tableView.setItems(sortList);
-
+    public void Search(){
+        String query = addStudents_search.getText().toLowerCase();
+        addStudents_tableView.setItems(addStudentsListD.filtered(person -> person.getNom().toLowerCase().contains(query)
+                || person.getNiveau().toLowerCase().contains(query)
+                || person.getPrenom().toLowerCase().contains(query)
+                || person.getSexe().toLowerCase().contains(query)
+                || person.getMassar().toLowerCase().contains(query)
+                || person.getClasse().toLowerCase().contains(query)
+                || String.valueOf(person.getId()).contains(query)
+                || person.getDateNaiss().toString().contains(query)
+                ));
     }
 
     private ObservableList<Etudiant> addStudentsListD;
@@ -191,7 +162,7 @@ public class EtudiantController implements Initializable {
 
         ObservableList ObList = FXCollections.observableArrayList(yearL);
         addStudents_niv.setItems(ObList);
-        addStudentsSearch();
+        
 
     }
 
@@ -229,7 +200,7 @@ public class EtudiantController implements Initializable {
         addStudents_sexe.setValue(studentD.getSexe());
         addStudents_niv.setValue(studentD.getNiveau());
         addStudents_dateNaiss.setValue(LocalDate.parse(String.valueOf(studentD.getDateNaiss())));
-        addStudentsSearch();
+        
 
 
     }
@@ -298,7 +269,7 @@ public class EtudiantController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        addStudentsSearch();
+        
     }
 
     public void addStudentsClear() {
@@ -310,7 +281,7 @@ public class EtudiantController implements Initializable {
         addStudents_classe.setText("");
         addStudents_massar.setText("");
         addStudents_dateNaiss.setValue(null);
-        addStudentsSearch();
+        
     }
 
     public void addStudentsUpdate() {
@@ -375,7 +346,7 @@ public class EtudiantController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        addStudentsSearch();
+        
     }
 
 
@@ -404,7 +375,8 @@ public class EtudiantController implements Initializable {
 
 
     public void exit(ActionEvent e ){
-        System.exit(0);
+        Stage stage = (Stage) Mbtn.getScene().getWindow();
+        stage.close();
     }
 
     public void minimize(ActionEvent e){
@@ -418,7 +390,7 @@ public class EtudiantController implements Initializable {
         addStudentsShowListData();
         addStudentsYearList();
         addStudentsSexeList();
-        addStudentsSearch();
+        
         Xbtn.setStyle("-fx-background-color: null;");
         Mbtn.setStyle("-fx-background-color: null;");
     }

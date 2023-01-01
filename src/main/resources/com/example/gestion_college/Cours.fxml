@@ -13,17 +13,17 @@
     <children>
         <AnchorPane prefHeight="324.0" prefWidth="1030.0">
             <children>
-                <TextField fx:id="addCours_search" layoutX="105.0" layoutY="22.0" onKeyPressed="#addCoursSearch" onKeyTyped="#addCoursSearch" promptText="search" />
+                <TextField fx:id="addCours_search" layoutX="105.0" layoutY="22.0" onKeyTyped="#addCoursSearch" promptText="search" />
                 <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />
-                <TableView fx:id="addCours_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addCoursSelect" prefHeight="200.0" prefWidth="931.0">
+                <TableView fx:id="addCours_tableView" layoutY="66.0" onMouseClicked="#addCoursSelect" prefHeight="200.0" prefWidth="666.0">
                     <columns>
-                        <TableColumn fx:id="addCours_col_id" prefWidth="97.0" text="Id Cours" />
-                        <TableColumn fx:id="addCours_col_nom" prefWidth="107.0" text="Nom du Cous" />
-                        <TableColumn fx:id="addCours_col_hd" prefWidth="119.0" text="Heure Debut" />
-                        <TableColumn fx:id="addCours_col_hf" prefWidth="134.0" text="Heure Fin" />
-                        <TableColumn fx:id="addCours_col_ens" minWidth="0.0" prefWidth="119.0" text="Enseignant" />
-                        <TableColumn fx:id="addCours_col_classe" minWidth="0.0" prefWidth="144.0" text="Classe" />
-                        <TableColumn fx:id="addCours_col_salle" minWidth="0.0" prefWidth="209.0" text="Salle" />
+                        <TableColumn fx:id="addCours_col_id" prefWidth="66.0" text="Id Cours" />
+                        <TableColumn fx:id="addCours_col_nom" prefWidth="98.0" text="Nom du Cous" />
+                        <TableColumn fx:id="addCours_col_hd" prefWidth="79.0" text="Heure Debut" />
+                        <TableColumn fx:id="addCours_col_hf" prefWidth="75.0" text="Heure Fin" />
+                        <TableColumn fx:id="addCours_col_ens" minWidth="0.0" prefWidth="102.0" text="Enseignant" />
+                        <TableColumn fx:id="addCours_col_classe" minWidth="0.0" prefWidth="114.0" text="Classe" />
+                        <TableColumn fx:id="addCours_col_salle" minWidth="0.0" prefWidth="130.0" text="Salle" />
                     </columns>
                 </TableView>
                 <Button fx:id="Xbtn" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" text="X">
@@ -36,6 +36,16 @@
                         <Font name="System Bold" size="33.0" />
                     </font>
                 </Button>
+            <TableView fx:id="addProfs_tableView" layoutX="722.0" layoutY="110.0" onMouseClicked="#addCoursSelect" prefHeight="200.0" prefWidth="167.0">
+               <columns>
+                  <TableColumn fx:id="addSalles_col_SalleID" prefWidth="66.0" text="ID Salle" />
+                  <TableColumn fx:id="addSalles_col_type" prefWidth="98.0" text="Type Salle" />
+               </columns>
+            </TableView>
+            <TextField fx:id="Horaire" layoutX="700.0" layoutY="22.0" prefHeight="25.0" prefWidth="71.0" />
+            <TextField fx:id="Type" layoutX="785.0" layoutY="22.0" prefHeight="25.0" prefWidth="71.0" />
+            <TextField fx:id="Materiels" layoutX="700.0" layoutY="60.0" prefHeight="25.0" prefWidth="123.0" />
+            <Button layoutX="837.0" layoutY="60.0" mnemonicParsing="false" onAction="#addProfsShowListData" text="Voir" />
             </children>
         </AnchorPane>
         <Label layoutX="68.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="ID Cours :" />

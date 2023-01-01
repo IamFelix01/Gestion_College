@@ -13,12 +13,10 @@ import javafx.fxml.FXML;
 
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class NiveauController implements Initializable {
+public class SalleController implements Initializable {
     private Stage stage;
     private Scene scene;
 
@@ -29,158 +27,117 @@ public class NiveauController implements Initializable {
     private Button Xbtn;
 
     @FXML
-    private TextField addProfs_ID;
+    private TextField addLignes_ID;
 
     @FXML
-    private TableColumn<?, ?> addProfs_col_lastName;
+    private TableColumn<?, ?> addLignes_col_idLigne;
 
     @FXML
-    private TableColumn<?, ?> addProfs_col_profNum;
+    private TableColumn<?, ?> addLignes_col_idSalle;
 
     @FXML
-    private TextField addProfs_nom;
+    private TableColumn<?, ?> addLignes_col_materiel;
 
     @FXML
-    private TableView<Niveau> addProfs_tableView;
+    private TextField addLignes_idSalle;
+
+    @FXML
+    private TextField addLignes_materiel;
+
+    @FXML
+    private TableView<Salle> addProfs_tableView;
+
+    @FXML
+    private TableView<Ligne> addProfs_tableView1;
+
+    @FXML
+    private TextField addSalles_ID;
+
+    @FXML
+    private TableColumn<?, ?> addSalles_col_SalleID;
+
+    @FXML
+    private TableColumn<?, ?> addSalles_col_type;
+
+    @FXML
+    private TextField addSalles_type;
 
     private Connection connect;
     private PreparedStatement prepare;
     private Statement statement;
     private ResultSet result;
 
+    //lister les Ligne de la bdd
+    public ObservableList<Ligne> addLigneListData(){
+        ObservableList<Ligne> listLigne = FXCollections.observableArrayList();
 
-    @FXML
-    private TextField addProfs_ID1;
-
-    @FXML
-    private TextField addProfs_ID11;
-
-
-
-    @FXML
-    private TableColumn<?, ?> addProfs_col_lastName1;
-
-    @FXML
-    private TableColumn<?, ?> addProfs_col_niv;
-
-
-    @FXML
-    private TableColumn<?, ?> addProfs_col_profNum1;
-
-    @FXML
-    private ComboBox<String> addStudents_niv;
-
-    @FXML
-    private TextField addProfs_nom1;
-
-    @FXML
-    private TextField addProfs_nom11;
-
-    @FXML
-    private TableView<Classe> addProfs_tableView1;
-//    @FXML
-//    private ComboBox<?> addStudents_niv;
-
-    @FXML
-    private TableView<?> addProfs_tableView11;
-    //lister les Classe de la bdd
-    public ObservableList<Classe> addClasseListData(){
-        ObservableList<Classe> listClasse = FXCollections.observableArrayList();
-
-        String sql = "SELECT * FROM Classe";
+        String sql = "SELECT * FROM Ligne";
 
 
         try {
             Connection connect = getConnection();
-            Classe profD;
+            Ligne profD;
             PreparedStatement prepare = connect.prepareStatement(sql);
             ResultSet result = prepare.executeQuery();
 
             while (result.next()) {
-                profD = new Classe(result.getInt("id"),
-                        result.getString("nom"),
-                        result.getString("niveau")
+                profD = new Ligne(result.getInt("id"),
+                        result.getString("materiel"),
+                        result.getInt("idSalle")
                 );
 
-                listClasse.add(profD);
+                listLigne.add(profD);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listClasse;
+        return listLigne;
 
     }
 
-    private ObservableList<Classe> addClasseListD;
+    private ObservableList<Ligne> addLigneListD;
 
     public void addProfsShowListData1() {
-        addClasseListD = addClasseListData();
+        addLigneListD = addLigneListData();
 
-        addProfs_col_profNum1.setCellValueFactory(new PropertyValueFactory<>("id"));
-        addProfs_col_lastName1.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        addProfs_col_niv.setCellValueFactory(new PropertyValueFactory<>("niveau"));
-        addProfs_tableView1.setItems(addClasseListD);
-
-    }
-
-    private String[] nivList = {"1ERE", "2EME", "3EME"};
-
-    public void addStudentsSexeList() {
-
-        List<String> SexeL = new ArrayList<>();
-
-
-        try {
-            connect = getConnection();
-            prepare = connect.prepareStatement("select distinct (nom) from niveau");
-            result = prepare.executeQuery();
-            while (result.next()){
-                SexeL.add(result.getString(1));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        ObservableList ObList = FXCollections.observableArrayList(SexeL);
-        addStudents_niv.setItems(ObList);
+        addLignes_col_idLigne.setCellValueFactory(new PropertyValueFactory<>("id"));
+        addLignes_col_materiel.setCellValueFactory(new PropertyValueFactory<>("materiel"));
+        addLignes_col_idSalle.setCellValueFactory(new PropertyValueFactory<>("idSalle"));
+        addProfs_tableView1.setItems(addLigneListD);
 
     }
 
-    //ajouter un Classe selectionné dans les champs pour faire MAJ
+    //ajouter un Ligne selectionné dans les champs pour faire MAJ
     public void addProfsSelect1() {
 
-        Classe profD = (Classe) addProfs_tableView1.getSelectionModel().getSelectedItem();
+        Ligne profD = (Ligne) addProfs_tableView1.getSelectionModel().getSelectedItem();
         int num = addProfs_tableView1.getSelectionModel().getSelectedIndex();
 
         if ((num - 1) < -1) {
             return;
         }
 
-        addProfs_ID1.setText(String.valueOf(profD.getId()));
-        addProfs_nom1.setText(profD.getNom());
-        addStudents_niv.setValue(profD.getNiveau());
-        //addStudents_niv.getSelectionModel().select(nivList[]);
+        addLignes_ID.setText(String.valueOf(profD.getId()));
+        addLignes_materiel.setText(profD.getMateriel());
+        addLignes_idSalle.setText(String.valueOf(profD.getIdSalle()));
 
     }
 
 
-    //   create table Classe(id int primary key, nom varchar(30),prenom varchar(15), sexe varchar(10), Contact varchar(15), matiere varchar(15), Classe varchar(15));
-    //insert into Classe values (1,
-    public void ajouterClasse() {
+    //   create table Ligne(id int primary key, type varchar(30),pretype varchar(15), sexe varchar(10), Contact varchar(15), matiere varchar(15), Ligne varchar(15));
+    //insert into Ligne values (1,
+    public void ajouterLigne() {
 
-        String insertData = "INSERT INTO Classe (id, nom, niveau) VALUES(?,?,?)";
+        String insertData = "INSERT INTO Ligne (id, materiel, idSalle) VALUES(?,?,?)";
 
         try {
             connect = getConnection();
             Alert alert;
 
-            if (addProfs_ID1.getText().isEmpty()
-                    || addProfs_nom1.getText().isEmpty()
-                    || addStudents_niv.getSelectionModel().getSelectedItem() ==null
+            if (addLignes_ID.getText().isEmpty()
+                    || addLignes_materiel.getText().isEmpty()
+                    || addLignes_idSalle.getText().isEmpty()
             ) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
@@ -189,8 +146,8 @@ public class NiveauController implements Initializable {
                 alert.showAndWait();
             } else {
 //            CHECK IF THE COURSE YOU WANT TO INSERT IS ALREADY EXIST!
-                String checkData = "SELECT id FROM Classe WHERE id = '"
-                        + addProfs_ID1.getText() + "'";
+                String checkData = "SELECT id FROM Ligne WHERE id = '"
+                        + addLignes_ID.getText() + "'";
 
                 statement = connect.createStatement();
                 result = statement.executeQuery(checkData);
@@ -199,13 +156,13 @@ public class NiveauController implements Initializable {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
-                    alert.setContentText("Classe: " + addProfs_ID1.getText() + " est deja ajouté");
+                    alert.setContentText("Ligne: " + addLignes_ID.getText() + " est deja ajouté");
                     alert.showAndWait();
                 } else {
                     prepare = connect.prepareStatement(insertData);
-                    prepare.setString(1, addProfs_ID1.getText());
-                    prepare.setString(2, addProfs_nom1.getText());
-                    prepare.setString(3, (String) addStudents_niv.getSelectionModel().getSelectedItem());
+                    prepare.setString(1, addLignes_ID.getText());
+                    prepare.setString(2, addLignes_materiel.getText());
+                    prepare.setString(3, addLignes_idSalle.getText());
 
                     prepare.executeUpdate();
 
@@ -228,25 +185,26 @@ public class NiveauController implements Initializable {
     }
 
     public void addProfsClear1() {
-        addProfs_ID1.setText("");
-        addProfs_nom1.setText("");
+        addLignes_ID.setText("");
+        addLignes_materiel.setText("");
+        addLignes_idSalle.setText("");
     }
 
     public void addProfsUpdate1() {
 
-        String updateData = "UPDATE Classe SET "
-                + "id = '" + addProfs_ID1.getText()
-                + "', nom = '" + addProfs_nom1.getText()
-                + "', niveau = '" +(String) addStudents_niv.getSelectionModel().getSelectedItem()
+        String updateData = "UPDATE Ligne SET "
+                + "id = '" + addLignes_ID.getText()
+                + "', materiel = '" + addLignes_materiel.getText()
+                + "', idSalle = '" + addLignes_idSalle.getText()
                 + "' WHERE id = '"
-                + addProfs_ID1.getText() + "'";
+                + addLignes_ID.getText() + "'";
 
         try {
             connect = getConnection();
             Alert alert;
-            if (addProfs_ID1.getText().isEmpty()
-                    || addProfs_nom1.getText().isEmpty()
-                    || ((String) addStudents_niv.getSelectionModel().getSelectedItem()).isEmpty()
+            if (addLignes_ID.getText().isEmpty()
+                    || addLignes_materiel.getText().isEmpty()
+                    || addLignes_idSalle.getText().isEmpty()
             ){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
@@ -258,7 +216,7 @@ public class NiveauController implements Initializable {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation Message");
                 alert.setHeaderText(null);
-                alert.setContentText("etes-vous sure pour modifier " + addProfs_ID1.getText() + "?");
+                alert.setContentText("etes-vous sure pour modifier " + addLignes_ID.getText() + "?");
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if (option.get().equals(ButtonType.OK)) {
@@ -285,73 +243,73 @@ public class NiveauController implements Initializable {
         }
     }
 
-    //lister les Niveau de la bdd
-    public ObservableList<Niveau> addprofListData(){
-        ObservableList<Niveau> listNiveau = FXCollections.observableArrayList();
+    //lister les Salle de la bdd
+    public ObservableList<Salle> addprofListData(){
+        ObservableList<Salle> listSalle = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM Niveau";
+        String sql = "SELECT * FROM Salle";
 
 
         try {
             Connection connect = getConnection();
-            Niveau profD;
+            Salle profD;
             PreparedStatement prepare = connect.prepareStatement(sql);
             ResultSet result = prepare.executeQuery();
 
             while (result.next()) {
-                profD = new Niveau(result.getInt("id"),
-                        result.getString("nom")
+                profD = new Salle(result.getInt("id"),
+                        result.getString("type")
                 );
 
-                listNiveau.add(profD);
+                listSalle.add(profD);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listNiveau;
+        return listSalle;
 
     }
 
-    private ObservableList<Niveau> addProfsListD;
+    private ObservableList<Salle> addProfsListD;
 
     public void addProfsShowListData() {
         addProfsListD = addprofListData();
 
-        addProfs_col_profNum.setCellValueFactory(new PropertyValueFactory<>("id"));
-        addProfs_col_lastName.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        addSalles_col_SalleID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        addSalles_col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
         addProfs_tableView.setItems(addProfsListD);
 
     }
 
-    //ajouter un Niveau selectionné dans les champs pour faire MAJ
+    //ajouter un Salle selectionné dans les champs pour faire MAJ
     public void addProfsSelect() {
 
-        Niveau profD = (Niveau) addProfs_tableView.getSelectionModel().getSelectedItem();
+        Salle profD = (Salle) addProfs_tableView.getSelectionModel().getSelectedItem();
         int num = addProfs_tableView.getSelectionModel().getSelectedIndex();
 
         if ((num - 1) < -1) {
             return;
         }
 
-        addProfs_ID.setText(String.valueOf(profD.getId()));
-        addProfs_nom.setText(profD.getNom());
+        addSalles_ID.setText(String.valueOf(profD.getId()));
+        addSalles_type.setText(profD.getType());
 
     }
 
-    //   create table Niveau(id int primary key, nom varchar(30),prenom varchar(15), sexe varchar(10), Contact varchar(15), matiere varchar(15), Classe varchar(15));
-    //insert into Niveau values (1,
-    public void ajouterNiveau() {
+    //   create table Salle(id int primary key, type varchar(30),pretype varchar(15), sexe varchar(10), Contact varchar(15), matiere varchar(15), Ligne varchar(15));
+    //insert into Salle values (1,
+    public void ajouterSalle() {
 
-        String insertData = "INSERT INTO Niveau (id, nom) VALUES(?,?)";
+        String insertData = "INSERT INTO Salle (id, type ) VALUES(?,?)";
 
         try {
             connect = getConnection();
             Alert alert;
 
-            if (addProfs_ID.getText().isEmpty()
-                    || addProfs_nom.getText().isEmpty()
-                    ) {
+            if (addSalles_ID.getText().isEmpty()
+                    || addSalles_type.getText().isEmpty()
+            ) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
@@ -359,8 +317,8 @@ public class NiveauController implements Initializable {
                 alert.showAndWait();
             } else {
 //            CHECK IF THE COURSE YOU WANT TO INSERT IS ALREADY EXIST!
-                String checkData = "SELECT id FROM Niveau WHERE id = '"
-                        + addProfs_ID.getText() + "'";
+                String checkData = "SELECT id FROM Salle WHERE id = '"
+                        + addSalles_ID.getText() + "'";
 
                 statement = connect.createStatement();
                 result = statement.executeQuery(checkData);
@@ -369,12 +327,12 @@ public class NiveauController implements Initializable {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
-                    alert.setContentText("Niveau: " + addProfs_ID.getText() + " est deja ajouté");
+                    alert.setContentText("Salle: " + addSalles_ID.getText() + " est deja ajouté");
                     alert.showAndWait();
                 } else {
                     prepare = connect.prepareStatement(insertData);
-                    prepare.setString(1, addProfs_ID.getText());
-                    prepare.setString(2, addProfs_nom.getText());
+                    prepare.setString(1, addSalles_ID.getText());
+                    prepare.setString(2, addSalles_type.getText());
 
                     prepare.executeUpdate();
 
@@ -397,24 +355,24 @@ public class NiveauController implements Initializable {
     }
 
     public void addProfsClear() {
-        addProfs_ID.setText("");
-        addProfs_nom.setText("");
+        addSalles_ID.setText("");
+        addSalles_type.setText("");
     }
 
     public void addProfsUpdate() {
 
-        String updateData = "UPDATE Niveau SET "
-                + "id = '" + addProfs_ID.getText()
-                + "', nom = '" + addProfs_nom.getText()
+        String updateData = "UPDATE Salle SET "
+                + "id = '" + addSalles_ID.getText()
+                + "', type = '" + addSalles_type.getText()
                 + "' WHERE id = '"
-                + addProfs_ID.getText() + "'";
+                + addSalles_ID.getText() + "'";
 
         try {
             connect = getConnection();
             Alert alert;
-            if (addProfs_ID.getText().isEmpty()
-                    || addProfs_nom.getText().isEmpty()
-                    ){
+            if (addSalles_ID.getText().isEmpty()
+                    || addSalles_type.getText().isEmpty()
+            ){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
@@ -425,7 +383,7 @@ public class NiveauController implements Initializable {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation Message");
                 alert.setHeaderText(null);
-                alert.setContentText("etes-vous sure pour modifier " + addProfs_ID.getText() + "?");
+                alert.setContentText("etes-vous sure pour modifier " + addSalles_ID.getText() + "?");
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if (option.get().equals(ButtonType.OK)) {
@@ -493,7 +451,7 @@ public class NiveauController implements Initializable {
         addProfsShowListData();
         addProfsShowListData1();
         //addProfsYearList();
-        addStudentsSexeList();
+        //addStudentsSexeList();
         Xbtn.setStyle("-fx-background-color: null;");
         Mbtn.setStyle("-fx-background-color: null;");
     }

@@ -349,7 +349,7 @@ public class EnseignantController implements Initializable {
 
 
     public void exit(ActionEvent e ){
-        System.exit(0);
+        stage.close();
     }
 
     public void minimize(ActionEvent e){

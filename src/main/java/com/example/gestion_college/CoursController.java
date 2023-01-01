@@ -2,8 +2,6 @@ package com.example.gestion_college;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +13,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -78,6 +74,22 @@ public class CoursController implements Initializable {
     @FXML
     private TextField addCours_search;
 
+    @FXML
+    private TableView<Salle> addProfs_tableView;
+
+    @FXML
+    private TableColumn<?, ?> addSalles_col_SalleID;
+
+    @FXML
+    private TableColumn<?, ?> addSalles_col_type;
+    @FXML
+    private TextField Horaire;
+
+    @FXML
+    private TextField Materiels;
+    @FXML
+    private TextField Type;
+
     
     
     private Connection connect;
@@ -135,38 +147,6 @@ public class CoursController implements Initializable {
 
     }
 
-    //add les niveaux au list
-//    private String[] niveauList = {"1ERE", "2EME", "3EME"};
-//
-//    public void addCoursYearList() {
-//
-//        List<String> yearL = new ArrayList<>();
-//
-//        for (String data : niveauList) {
-//            yearL.add(data);
-//        }
-//
-//        ObservableList ObList = FXCollections.observableArrayList(yearL);
-//        addCours_hf.setItems(ObList);
-//
-//    }
-//
-//    private String[] heureDebutList = {"Mâle", "Femelle"};
-//
-//    public void addCoursheureDebutList() {
-//
-//        List<String> heureDebutL = new ArrayList<>();
-//
-//        for (String data : heureDebutList) {
-//            heureDebutL.add(data);
-//        }
-//
-//        ObservableList ObList = FXCollections.observableArrayList(heureDebutL);
-//        addCours_heureDebut.setItems(ObList);
-//
-//    }
-
-
     //ajouter un Cours selectionné dans les champs pour faire MAJ
     public void addCoursSelect() {
 
@@ -185,7 +165,7 @@ public class CoursController implements Initializable {
         addCours_classe.setText(CoursD.getClasse());
         addCours_salle.setText(CoursD.getSalle());
 
-        
+
     }
 
     //create table Cours (id int primary key, nom varchar(30),heureDebut varchar(30),heureFin varchar(30), enseignant varchar(30), classe varchar(30), salle varchar(30) )
@@ -325,43 +305,81 @@ public class CoursController implements Initializable {
         }
     }
 
+    public void addCoursSearch(){
+        String query = addCours_search.getText().toLowerCase();
+        addCours_tableView.setItems(addCoursListD.filtered(person -> person.getNom().toLowerCase().contains(query)
+                || person.getSalle().toLowerCase().contains(query)
+                || person.getClasse().toLowerCase().contains(query)
+                || person.getEnseignant().toLowerCase().contains(query)
+                || String.valueOf(person.getHeureFin()).contains(query)
+                || String.valueOf(person.getHeureDebut()).contains(query)
+                || String.valueOf(person.getId()).contains(query)
+        ));
+    }
 
-    public void addCoursSearch() {
+//    select id, type from salle where (id,8) not in (select Salle, heureDebut from cours) And "Counter" in (select materiel from ligne where id=idsalle) and type = "laboratoire";
+//SELECT * FROM Ligne WHERE materiel IN ("Rideau noir", "Labo") GROUP BY idSalle HAVING COUNT(*) = 2;
+//SELECT salle.id, type from salle,ligne where type = "Amphi" And (salle.id,8) not in (select Salle, heureDebut from cours)  and materiel IN ("Rideau noir", "Projecteur vidéo") GROUP BY idSalle HAVING COUNT(*) = 2;
+    //    select id, type from salle where (id,16) not in (select Salle, heureDebut from cours) And id in (SELECT idSalle FROM Ligne WHERE materiel IN ("Rideau noir", "Projecteur vidéo") GROUP BY idSalle HAVING COUNT(*) = 2) and type = "Amphi";
 
-        FilteredList<Cours> filter = new FilteredList<>(addCoursListD, e -> true);
+    //lister les Salle de la bdd
+    public ObservableList<Salle> addprofListData(){
+        ObservableList<Salle> listSalle = FXCollections.observableArrayList();
 
-        addCours_search.textProperty().addListener((Observable, oldValue, newValue) -> {
+        String sql = "select id, type from salle where (id,?) not in (select Salle, heureDebut from cours) And type = ? And id in (SELECT idSalle FROM Ligne WHERE materiel IN (";
 
-            filter.setPredicate(predicateCours -> {
 
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
+        String[] Parameter = Materiels.getText().split("-");
+        String temp = "";
 
-                String searchKey = newValue.toLowerCase();
+        for(int i = 0; i < Parameter.length; i++) {
+            temp += ",?";
+        }
 
-                if (String.valueOf(predicateCours.getId()).contains(searchKey)) {
-                    return true;
-                } else if (String.valueOf(predicateCours.getHeureDebut()).contains(searchKey)) {
-                    return true;
-                } else if (String.valueOf(predicateCours.getHeureFin()).contains(searchKey)) {
-                    return true;
-                } else if (predicateCours.getEnseignant().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateCours.getClasse().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateCours.getNom().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else return predicateCours.getSalle().contains(searchKey);
-            });
-        });
+        temp = temp.replaceFirst(",", "");
 
-        SortedList<Cours> sortList = new SortedList<>(filter);
+        temp += ") GROUP BY idSalle HAVING COUNT(*) = ?) ";
+        sql = sql + temp;
 
-        sortList.comparatorProperty().bind(addCours_tableView.comparatorProperty());
-        addCours_tableView.setItems(sortList);
+        try {
+            Connection connect = getConnection();
+            Salle profD;
+            PreparedStatement prepare = connect.prepareStatement(sql);
+            prepare.setString(1,Horaire.getText());
+            prepare.setString(2,Type.getText());
+            int i;
+            for (i=3 ; i <Parameter.length + 3; i++)
+                prepare.setString(i,Parameter[i-3]);
+            prepare.setString(i, String.valueOf(Parameter.length));
+
+            ResultSet result = prepare.executeQuery();
+
+            while (result.next()) {
+                profD = new Salle(result.getInt("id"),
+                        result.getString("type")
+                );
+
+                listSalle.add(profD);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSalle;
 
     }
+
+    private ObservableList<Salle> addProfsListD;
+
+    public void addProfsShowListData() {
+        addProfsListD = addprofListData();
+
+        addSalles_col_SalleID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        addSalles_col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+        addProfs_tableView.setItems(addProfsListD);
+
+    }
+
 
 
     public static Connection getConnection() throws Exception {
@@ -389,7 +407,9 @@ public class CoursController implements Initializable {
 
 
     public void exit(ActionEvent e ){
-        System.exit(0);
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        stage.close();
+        //System.exit(0);
     }
 
     public void minimize(ActionEvent e){
