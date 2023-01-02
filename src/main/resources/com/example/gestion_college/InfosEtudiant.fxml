@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="475.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestion_college.InfosEtudiantController">
+    <children>
+        <AnchorPane prefHeight="324.0" prefWidth="1030.0">
+            <children>
+                <Button fx:id="Xbtn" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" text="X">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="Mbtn" layoutX="898.0" layoutY="-5.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="28.0" text="-">
+                    <font>
+                        <Font name="System Bold" size="33.0" />
+                    </font>
+                </Button>
+                <Label layoutX="270.0" layoutY="69.0" prefHeight="18.0" prefWidth="71.0" text="ID :" />
+                <TextField fx:id="addStudents_ID" layoutX="400.0" layoutY="66.0" />
+                <Label layoutX="271.0" layoutY="112.0" prefHeight="18.0" prefWidth="71.0" text="Nom :" />
+                <TextField fx:id="addStudents_nom" layoutX="401.0" layoutY="109.0" />
+                <Label layoutX="271.0" layoutY="163.0" prefHeight="18.0" prefWidth="71.0" text="Prenom :" />
+                <TextField fx:id="addStudents_prenom" layoutX="401.0" layoutY="160.0" />
+                <Label layoutX="270.0" layoutY="300.0" prefHeight="18.0" prefWidth="71.0" text="Sexe :" />
+                <ComboBox fx:id="addStudents_sexe" layoutX="400.0" layoutY="298.0" onAction="#addStudentsSexeList" prefWidth="150.0" />
+                <Label layoutX="270.0" layoutY="210.0" prefHeight="18.0" prefWidth="140.0" text="Date de naissanece :" />
+                <DatePicker fx:id="addStudents_dateNaiss" layoutX="400.0" layoutY="207.0" />
+                <Label layoutX="271.0" layoutY="255.0" prefHeight="18.0" prefWidth="71.0" text="Massar :" />
+                <TextField fx:id="addStudents_massar" layoutX="401.0" layoutY="252.0" />
+                <Label layoutX="384.0" layoutY="10.0" text="Vos Information">
+                    <font>
+                        <Font name="Elephant" size="32.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Button layoutX="445.0" layoutY="414.0" mnemonicParsing="false" onAction="#addStudentsClear" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #8B8B8B;" text="Vider" />
+        <Button layoutX="577.0" layoutY="414.0" mnemonicParsing="false" onAction="#addStudentsUpdate" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #afd69b;" text="MAJ" />
+    </children>
+</AnchorPane>

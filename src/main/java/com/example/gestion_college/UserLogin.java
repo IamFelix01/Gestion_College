@@ -14,7 +14,7 @@ public class UserLogin extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("EspaceEtudiant.fxml"));
         Scene scene = new Scene(root);
         stage.initStyle(StageStyle.DECORATED.UNDECORATED);
         root.setOnMousePressed(new EventHandler<MouseEvent>() {

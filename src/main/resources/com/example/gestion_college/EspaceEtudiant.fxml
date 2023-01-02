@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="995.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestion_college.EspaceEtudiantController">
+    <children>
+        <Pane layoutX="-6.0" prefHeight="177.0" prefWidth="995.0" style="-fx-background-color: #0596ff;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Button layoutX="953.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="X">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="903.0" layoutY="-18.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="-">
+                    <font>
+                        <Font name="System Bold" size="35.0" />
+                    </font>
+                </Button>
+                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="41.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@logo.png" />
+                    </image>
+                </ImageView>
+                <Text fill="WHITE" layoutX="407.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME">
+                    <font>
+                        <Font name="Bauhaus 93" size="51.0" />
+                    </font>
+                </Text>
+                <!--                <FontAwesomeIconView fill="WHITE" glyphName="LOGO" layoutX="28.0" layoutY="97.0" size="70">-->
+                <!--                    <font>-->
+                <!--                        <Font size="88.0" />-->
+                <!--                    </font>-->
+                <!--                </FontAwesomeIconView>-->
+            </children>
+        </Pane>
+        <Pane layoutX="104.0" layoutY="246.0" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="246.0">
+            <children>
+                <GridPane alignment="CENTER" hgap="5.0" prefHeight="277.0" prefWidth="787.0" vgap="5.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="nivBtn" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="273.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToNiv" prefHeight="145.0" prefWidth="263.0" style="-fx-background-color: #0596ff;" styleClass="buttom" stylesheets="@../../../../../../../Gestion_College/src/main/java/com/example/gestion_college/style.css" text="      Changement  &#10;          de classe" textFill="WHITE" GridPane.columnIndex="1">
+                            <graphic>
+                                <!--                                <FontAwesomeIconView fill="#2670dd" glyphName="INDENT" size="50" />-->
+                            </graphic>
+                            <font>
+                                <Font name="Bauhaus 93" size="22.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets />
+                            </GridPane.margin>
+                        </Button>
+                        <Button fx:id="etudiantBtn" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToEtu" prefHeight="145.0" prefWidth="263.0" style="-fx-background-color: #0596ff;" styleClass="buttom" stylesheets="@../../../../../../../Gestion_College/src/main/java/com/example/gestion_college/style.css" text="Vos Infos" textFill="WHITE">
+                            <graphic>
+                                <!--                                <FontAwesomeIconView fill="#2670dd" glyphName="GROUP" size="50" text="" />-->
+                            </graphic>
+                            <font>
+                                <Font name="Bauhaus 93" size="24.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="proBtn" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="274.0" layoutY="10.0" mnemonicParsing="false" onAction="#ToEmploi" prefHeight="145.0" prefWidth="263.0" style="-fx-background-color: #0596ff;" styleClass="buttom" stylesheets="@../../../../../../../Gestion_College/src/main/java/com/example/gestion_college/style.css" text="Emploi" textFill="WHITE" GridPane.columnIndex="2">
+                            <graphic>
+                                <!--                                <FontAwesomeIconView fill="#2670dd" glyphName="GROUP" size="50" text="" />-->
+                            </graphic>
+                            <font>
+                                <Font name="Bauhaus 93" size="24.0" />
+                            </font>
+                        </Button>
+                        <ImageView fitHeight="100.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Students.png" />
+                            </image>
+                            <GridPane.margin>
+                                <Insets left="10.0" />
+                            </GridPane.margin>
+                        </ImageView>
+                        <ImageView fitHeight="91.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                            <image>
+                                <Image url="@emploi.png" />
+                            </image>
+                            <GridPane.margin>
+                                <Insets left="10.0" />
+                            </GridPane.margin>
+                        </ImageView>
+                        <ImageView fitHeight="101.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                            <image>
+                                <Image url="@niveau.png" />
+                            </image>
+                            <GridPane.margin>
+                                <Insets left="10.0" />
+                            </GridPane.margin>
+                        </ImageView>
+                    </children>
+                </GridPane>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
