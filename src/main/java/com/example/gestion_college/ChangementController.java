@@ -144,8 +144,8 @@ public class ChangementController implements Initializable {
 
     public void addStudentsUpdate() throws MessagingException {
 
-        sendEmail("soloraja006@gmail.com", "Demande de Changement pour " + "Etudiant : " +addStudents_nom +" "
-                +addStudents_prenom, addStudents_just.getText());
+        sendEmail("soloraja006@gmail.com", "Demande de Changement pour " + "Etudiant : " +addStudents_nom.getText() +" "
+                +addStudents_prenom.getText(), addStudents_just.getText());
 
     }
 
