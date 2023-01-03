@@ -3,10 +3,10 @@ Cette application java permet de faire la gestion d'une college, et Surtout l’
 absences des élèves, L'interface graphique est developpé par JavaFx.
 
 ## comment compiler les programmes ?
-1/ Il faut installer **intelij**.\n
-2/ ajouter **mysql.jar** au class path.\n
-3/ créer la base de donnée GestionCollege en utilisant le dossier **bdd**.\n
-4/ compiler et exécuter l'application sur Intelij
+1. Il faut installer **intelij**
+2. ajouter **mysql.jar** au class path.
+3. créer la base de donnée GestionCollege en utilisant le dossier **bdd**.
+4. compiler et exécuter l'application sur Intelij
 
 ## description du contenu des répertoires
 
