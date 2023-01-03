@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestion_college.SalleController">
+    <children>
+        <AnchorPane prefHeight="324.0" prefWidth="1030.0">
+            <children>
+                <TextField layoutX="105.0" layoutY="22.0" promptText="search" />
+<!--                <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />-->
+                <TableView fx:id="addProfs_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addProfsSelect" prefHeight="200.0" prefWidth="304.0">
+                    <columns>
+                        <TableColumn fx:id="addSalles_col_SalleID" prefWidth="105.0" text="ID Salle" />
+                        <TableColumn fx:id="addSalles_col_type" prefWidth="198.0" text="Type" />
+                    </columns>
+                </TableView>
+                <Button fx:id="Xbtn" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" text="X">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="Mbtn" layoutX="898.0" layoutY="-5.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="28.0" text="-">
+                    <font>
+                        <Font name="System Bold" size="33.0" />
+                    </font>
+                </Button>
+                <TextField layoutX="592.0" layoutY="22.0" promptText="search" />
+                <TableView fx:id="addProfs_tableView1" layoutX="528.0" layoutY="71.0" onMouseClicked="#addProfsSelect1" prefHeight="200.0" prefWidth="370.0">
+                    <columns>
+                        <TableColumn fx:id="addLignes_col_idLigne" prefWidth="94.0" text="ID Ligne" />
+                        <TableColumn fx:id="addLignes_col_materiel" prefWidth="115.0" text="Materiel" />
+                        <TableColumn fx:id="addLignes_col_idSalle" prefWidth="158.0" text="ID Salle" />
+                    </columns>
+                </TableView>
+                <Label layoutX="64.0" layoutY="329.0" prefHeight="18.0" prefWidth="71.0" text="ID Salle :" />
+                <TextField fx:id="addSalles_ID" layoutX="147.0" layoutY="326.0" />
+                <Label layoutX="64.0" layoutY="370.0" prefHeight="18.0" prefWidth="71.0" text="Type : " />
+                <TextField fx:id="addSalles_type" layoutX="147.0" layoutY="367.0" />
+            </children>
+        </AnchorPane>
+        <Button layoutX="298.0" layoutY="414.0" mnemonicParsing="false" onAction="#ajouterSalle" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #afd69b;" text="ADD" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="176.0" layoutY="414.0" mnemonicParsing="false" onAction="#updateSalle" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #EFD033;" text="Update" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="59.0" layoutY="414.0" mnemonicParsing="false" onAction="#deleteSalle" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font>
+        </Button>
+<!--        <Button layoutX="294.0" layoutY="437.0" mnemonicParsing="false" onAction="#ajouterSalle" prefHeight="30.0" prefWidth="85.0" text="ajouter" />-->
+<!--        <Button layoutX="82.0" layoutY="437.0" mnemonicParsing="false" onAction="#addProfsClear" prefHeight="30.0" prefWidth="85.0" text="Vider" />-->
+<!--        <Button layoutX="188.0" layoutY="437.0" mnemonicParsing="false" onAction="#updateSalle" prefHeight="30.0" prefWidth="85.0" text="MAJ" />-->
+        <Label layoutX="531.0" layoutY="304.0" prefHeight="18.0" prefWidth="71.0" text="ID Ligne :  " />
+        <TextField fx:id="addLignes_ID" layoutX="614.0" layoutY="301.0" />
+        <Label layoutX="531.0" layoutY="350.0" prefHeight="18.0" prefWidth="71.0" text="Materiel : " />
+        <TextField fx:id="addLignes_materiel" layoutX="614.0" layoutY="347.0" />
+        <Label layoutX="531.0" layoutY="388.0" prefHeight="18.0" prefWidth="71.0" text="ID Salle : " />
+        <TextField fx:id="addLignes_idSalle" layoutX="614.0" layoutY="389.0" />
+      <Button layoutX="668.0" layoutY="422.0" mnemonicParsing="false" onAction="#ajouterLigne" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #afd69b;" text="ADD" textFill="WHITE">
+         <font>
+            <Font name="Elephant" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="560.0" layoutY="422.0" mnemonicParsing="false" onAction="#deleteLigne" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Elephant" size="12.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>

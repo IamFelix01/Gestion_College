@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestion_college.CoursController">
+    <children>
+        <AnchorPane prefHeight="324.0" prefWidth="1030.0">
+            <children>
+                <TextField fx:id="addCours_search" layoutX="105.0" layoutY="22.0" onKeyTyped="#addCoursSearch" promptText="search" />
+<!--                <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />-->
+                <TableView fx:id="addCours_tableView" layoutY="66.0" onMouseClicked="#addCoursSelect" prefHeight="200.0" prefWidth="666.0">
+                    <columns>
+                        <TableColumn fx:id="addCours_col_id" prefWidth="66.0" text="Id Cours" />
+                        <TableColumn fx:id="addCours_col_nom" prefWidth="98.0" text="Nom du Cous" />
+                        <TableColumn fx:id="addCours_col_hd" prefWidth="79.0" text="Heure Debut" />
+                        <TableColumn fx:id="addCours_col_hf" prefWidth="75.0" text="Heure Fin" />
+                        <TableColumn fx:id="addCours_col_classe" minWidth="0.0" prefWidth="67.0" text="Classe" />
+                        <TableColumn fx:id="addCours_col_salle" maxWidth="100.0" minWidth="0.0" prefWidth="99.0" text="Salle" />
+                  <TableColumn fx:id="addCours_col_jour" maxWidth="79.0" prefWidth="79.0" text="Jour" />
+                    </columns>
+                </TableView>
+                <Button fx:id="Xbtn" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" text="X">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="Mbtn" layoutX="898.0" layoutY="-5.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="28.0" text="-">
+                    <font>
+                        <Font name="System Bold" size="33.0" />
+                    </font>
+                </Button>
+                <TableView fx:id="addProfs_tableView" layoutX="731.0" layoutY="62.0" onMouseClicked="#addCoursSelect" prefHeight="208.0" prefWidth="203.0">
+                    <columns>
+                        <TableColumn fx:id="addSalles_col_SalleID" prefWidth="91.0" text="ID Salle" />
+                        <TableColumn fx:id="addSalles_col_type" prefWidth="111.0" text="Type Salle" />
+                    </columns>
+                </TableView>
+                <TextField fx:id="Materiels" layoutX="787.0" layoutY="285.0" prefHeight="25.0" prefWidth="123.0" />
+            <Label layoutX="718.0" layoutY="289.0" prefHeight="17.0" prefWidth="58.0" text="Materiels:" />
+            </children>
+        </AnchorPane>
+        <Label layoutX="68.0" layoutY="310.0" prefHeight="18.0" prefWidth="71.0" text="ID Cours :" />
+        <TextField fx:id="addCours_ID" layoutX="151.0" layoutY="310.0" />
+        <Label layoutX="43.0" layoutY="350.0" prefHeight="18.0" prefWidth="96.0" text="Nom du Cous :" />
+        <TextField fx:id="addCours_nom" layoutX="151.0" layoutY="350.0" />
+        <Label layoutX="68.0" layoutY="390.0" prefHeight="18.0" prefWidth="96.0" text="ID Classe" />
+        <TextField fx:id="addCours_classe" layoutX="151.0" layoutY="390.0" />
+        <Label layoutX="327.0" layoutY="350.0" prefHeight="18.0" prefWidth="96.0" text="Heure Fin :" />
+        <TextField fx:id="addCours_hf" layoutX="435.0" layoutY="350.0" />
+        <Label layoutX="327.0" layoutY="390.0" prefHeight="18.0" prefWidth="71.0" text="ID Salle :" />
+        <TextField fx:id="addCours_salle" layoutX="435.0" layoutY="390.0" />
+        <Label layoutX="327.0" layoutY="310.0" prefHeight="18.0" prefWidth="96.0" text="Heure Debut :" />
+        <TextField fx:id="addCours_hd" layoutX="435.0" layoutY="310.0" />
+        <Button layoutX="215.0" layoutY="456.0" mnemonicParsing="false" onAction="#ajouterCours" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #afd69b;" text="ADD" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="122.0" layoutY="456.0" mnemonicParsing="false" onAction="#updateCours" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #EFD033;" text="Update" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="26.0" layoutY="456.0" mnemonicParsing="false" onAction="#deleteCours" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font>
+        </Button>
+          <TextField fx:id="Type" layoutX="787.0" layoutY="323.0" prefHeight="25.0" prefWidth="123.0" />
+          <TextField fx:id="Horaire" layoutX="787.0" layoutY="363.0" prefHeight="25.0" prefWidth="123.0" />
+          <Button layoutX="813.0" layoutY="408.0" mnemonicParsing="false" onAction="#addProfsShowListData" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #afd69b;" text="Verify">
+         <font>
+            <Font name="Segoe UI Black" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="726.0" layoutY="327.0" text="Type:" />
+      <Label layoutX="716.0" layoutY="367.0" text="Houraire:" />
+      <TextField fx:id="addCours_jour" layoutX="435.0" layoutY="431.0" />
+      <Label layoutX="350.0" layoutY="435.0" text="Jour:" />
+    </children>
+</AnchorPane>

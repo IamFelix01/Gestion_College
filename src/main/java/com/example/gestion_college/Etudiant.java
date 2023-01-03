@@ -7,18 +7,24 @@ public class Etudiant {
     private String prenom;
     private Date dateNaiss;
     private String sexe;
-    private String niveau;
-    private String Classe;
+    private String code_niveau;
+    private int id_classe;
     private String CNE;
+    private  int id_parent;
 
-    public Etudiant(String CNE, String nom, String prenom, Date dateNaiss, String sexe, String niveau, String classe) {
+    public Etudiant(String CNE, String nom, String prenom, Date dateNaiss, String sexe, String code_niveau, int id_classe,int id_parent) {
         this.CNE = CNE;
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaiss = dateNaiss;
         this.sexe = sexe;
-        this.niveau = niveau;
-        this.Classe = classe;
+        this.code_niveau = code_niveau;
+        this.id_classe = id_classe;
+        this.id_parent=id_parent;
+    }
+
+    public int getId_parent() {
+        return id_parent;
     }
 
     public String getCNE() {
@@ -41,12 +47,11 @@ public class Etudiant {
         return sexe;
     }
 
-    public String getNiveau() {
-        return niveau;
+    public String getCode_niveau() {
+        return code_niveau;
     }
 
-    public String getClasse() {
-        return Classe;
+    public int getId_classe() {
+        return id_classe;
     }
-
 }

@@ -22,6 +22,9 @@ import java.sql.*;
 import java.util.*;
 
 public class EnseignantController implements Initializable {
+    public TextField SearchField;
+    public TextField addProfs_idcours;
+    public TableColumn<Enseignant,String> addProfs_col_Idcours;
     private Stage stage;
     private Scene scene;
     @FXML
@@ -51,8 +54,7 @@ public class EnseignantController implements Initializable {
     @FXML
     private TableColumn<Enseignant, String> addProfs_col_lastName;
 
-    @FXML
-    private TableColumn<Enseignant, String> addProfs_col_matiere;
+
 
     @FXML
     private TableColumn<Enseignant, String> addProfs_col_profNum;
@@ -98,9 +100,9 @@ public class EnseignantController implements Initializable {
                         result.getString("nom"),
                         result.getString("prenom"),
                         result.getString("sexe"),
-                        result.getString("Contact"),
-                        result.getString("code_cours"),
-                        result.getString("code_niveau")
+                        result.getInt("Contact"),
+                        result.getInt("id_cours"),
+                        result.getInt("id_classe")
                 );
 
                 listEnseignant.add(profD);
@@ -120,8 +122,8 @@ public class EnseignantController implements Initializable {
         addProfs_col_lastName.setCellValueFactory(new PropertyValueFactory<>("nom"));
         addProfs_col_gender.setCellValueFactory(new PropertyValueFactory<>("Sexe"));
         addProfs_col_Contact.setCellValueFactory(new PropertyValueFactory<>("Contact"));
-        addProfs_col_matiere.setCellValueFactory(new PropertyValueFactory<>("Matiere"));
-        addProfs_col_classe.setCellValueFactory(new PropertyValueFactory<>("Classe"));
+        addProfs_col_Idcours.setCellValueFactory(new PropertyValueFactory<>("id_cours"));
+        addProfs_col_classe.setCellValueFactory(new PropertyValueFactory<>("id_classe"));
 
         addProfs_tableView.setItems(addProfsListD);
 
@@ -168,11 +170,10 @@ public class EnseignantController implements Initializable {
         addProfs_ID.setText(String.valueOf(profD.getId()));
         addProfs_nom.setText(profD.getNom());
         addProfs_prenom.setText(profD.getPrenom());
-        addProfs_classe.setText(profD.getClasse());
-        addProfs_matiere.setText(profD.getMatiere());
-        addProfs_sexe.setValue(profD.getSexe());
-//        addProfs_n.setSelectionModel(profD.getNiveau());
-        addProfs_contact.setText(profD.getContact());
+        addProfs_classe.setText(String.valueOf(profD.getId_classe()));
+        addProfs_idcours.setText(String.valueOf(profD.getId_cours()));
+        addProfs_sexe.setValue(String.valueOf(profD.getSexe()));
+        addProfs_contact.setText(String.valueOf(profD.getContact()));
 
 
     }
@@ -185,16 +186,15 @@ public class EnseignantController implements Initializable {
         String prenom = addProfs_prenom.getText();
         String sexe = (String) addProfs_sexe.getSelectionModel().getSelectedItem();
         int contact = Integer.parseInt(addProfs_contact.getText());
-        String code_cours = addProfs_matiere.getText();
-        String code_niveau = addProfs_classe.getText();
-        EnseignantModel.AjouterEnseignant(id_prof,nom,prenom,sexe,contact,code_cours,code_niveau);
+        int id_cours = Integer.parseInt(addProfs_idcours.getText());
+        int id_classe = Integer.parseInt(addProfs_classe.getText());
+        EnseignantModel.AjouterEnseignant(id_prof,nom,prenom,sexe,contact,id_cours,id_classe);
         addProfsShowListData();
     }
 
     public void addProfsClear() {
         addProfs_ID.setText("");
         addProfs_sexe.getSelectionModel().clearSelection();
-        addProfs_matiere.setText("");
         addProfs_prenom.setText("");
         addProfs_nom.setText("");
         addProfs_classe.setText("");
@@ -207,9 +207,9 @@ public class EnseignantController implements Initializable {
         String prenom = addProfs_prenom.getText();
         String sexe = (String) addProfs_sexe.getSelectionModel().getSelectedItem();
         int contact = Integer.parseInt(addProfs_contact.getText());
-        String code_cours = addProfs_matiere.getText();
-        String code_niveau = addProfs_classe.getText();
-        if(EnseignantModel.UpdateEnseignant(id_prof,nom,prenom,sexe,contact,code_cours,code_niveau)) {
+        int id_cours = Integer.parseInt(addProfs_matiere.getText());
+        int id_classe = Integer.parseInt(addProfs_classe.getText());
+        if(EnseignantModel.UpdateEnseignant(id_prof,nom,prenom,sexe,contact,id_cours,id_classe)) {
             // TO UPDATE THE TABLEVIEW
             addProfsShowListData();
             // TO CLEAR THE FIELDS
@@ -253,14 +253,21 @@ public void DeleteEnseignant(){
     }
 }
 
-
+    public void Search(){
+        String query = SearchField.getText().toLowerCase();
+        addProfs_tableView.setItems(addprofListData().filtered(person -> person.getNom().toLowerCase().contains(query)
+                || person.getPrenom().toLowerCase().contains(query)
+                || person.getSexe().toLowerCase().contains(query)
+        ));
+    }
 
 
 
     public void exit(ActionEvent e ){
-        System.exit(0);
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        stage.close();
+        //System.exit(0);
     }
-
     public void minimize(ActionEvent e){
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.setIconified(true);

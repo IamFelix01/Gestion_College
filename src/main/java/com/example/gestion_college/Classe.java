@@ -7,6 +7,10 @@ public class Classe {
     private String nom;
     private String code;
     private Niveau niveau;
+    private static int capacite;
+    public Classe(int id){
+        this.id=id;
+    }
     public Classe(int id,String nom){
         this.id=id;
         this.nom=nom;

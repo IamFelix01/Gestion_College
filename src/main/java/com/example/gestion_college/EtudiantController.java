@@ -22,6 +22,8 @@ import java.util.*;
 public class EtudiantController implements Initializable {
     public  TextField addStudents_CNE;
     public TableColumn<Etudiant, String> addStudents_col_cne;
+    public TextField addStudent_parent;
+    public TableColumn<Etudiant,String> addStudent_col_Parent;
     private Stage stage;
     private Scene scene;
     @FXML
@@ -30,10 +32,10 @@ public class EtudiantController implements Initializable {
 
 
     @FXML
-    private TableColumn<Etudiant, String> addStudents_col_classe;
+    private TableColumn<Etudiant, Integer> addStudents_col_classe;
 
     @FXML
-    private TableColumn<Etudiant, String> addStudents_col_niv;
+    private TableColumn<Etudiant, Integer> addStudents_col_niv;
 
     @FXML
     private TableColumn<Etudiant, String> addStudents_col_firstName;
@@ -105,8 +107,9 @@ public class EtudiantController implements Initializable {
                         result.getString("prenom"),
                         result.getDate("dateNaiss"),
                         result.getString("sexe"),
-                        result.getString("niveau"),
-                        result.getString("classe")
+                        result.getString("code_niveau"),
+                        result.getInt("id_classe"),
+                        result.getInt("id_parent")
                 );
 
                 listEtudiant.add(studentD);
@@ -122,43 +125,7 @@ public class EtudiantController implements Initializable {
 
     private static ObservableList<Etudiant> addStudentsListD ;
 
-    public void addStudentsSearch() {
-        System.out.println("add student search called");
 
-        FilteredList<Etudiant> filter = new FilteredList<>(addStudentsListD, e -> true);
-
-        addStudents_search.textProperty().addListener((Observable, oldValue, newValue) -> {
-
-            filter.setPredicate(predicateStudentData -> {
-
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                String searchKey = newValue.toLowerCase();
-
-                if (predicateStudentData.getClasse().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getPrenom().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getNom().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getCNE().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getSexe().toLowerCase().contains(searchKey)) {
-                    return true;
-                } else if (predicateStudentData.getDateNaiss().toString().contains(searchKey)) {
-                    return true;
-                } else return predicateStudentData.getNiveau().toLowerCase().contains(searchKey);
-            });
-        });
-
-        SortedList<Etudiant> sortList = new SortedList<>(filter);
-
-        sortList.comparatorProperty().bind(addStudents_tableView.comparatorProperty());
-        addStudents_tableView.setItems(sortList);
-
-    }
 
 
     public void addStudentsShowListData() {
@@ -168,30 +135,29 @@ public class EtudiantController implements Initializable {
         addStudents_col_lastName.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         addStudents_col_gender.setCellValueFactory(new PropertyValueFactory<>("sexe"));
         addStudents_col_birth.setCellValueFactory(new PropertyValueFactory<>("dateNaiss"));
-        addStudents_col_niv.setCellValueFactory(new PropertyValueFactory<>("niveau"));
-        addStudents_col_classe.setCellValueFactory(new PropertyValueFactory<>("Classe"));
+        addStudents_col_niv.setCellValueFactory(new PropertyValueFactory<>("code_niveau"));
+        addStudents_col_classe.setCellValueFactory(new PropertyValueFactory<>("id_classe"));
+        addStudent_col_Parent.setCellValueFactory(new PropertyValueFactory<>("id_parent"));
 
         addStudents_tableView.setItems(addStudentsListD);
 
     }
 
     //add les niveaux au list
-    private final String[] niveauList = {"1ERE", "2EME", "3EME"};
+    private final String[] niveauList = {"3EME", "4EME", "5EME","6EME"};
 
     public void addStudentsYearList() {
-
         List<String> yearL = new ArrayList<>(Arrays.asList(niveauList));
-
         ObservableList<String> ObList = FXCollections.observableArrayList(yearL);
         addStudents_niv.setItems(ObList);
-        addStudentsSearch();
+    }
+
+    public void showClasseStudents(){
 
     }
 
-    private final String[] SexeList = {"Homme", "Femme"};
-
     public void addStudentsSexeList() {
-
+        String[] SexeList = {"Homme", "Femme"};
         List<String> SexeL = new ArrayList<>(Arrays.asList(SexeList));
 
         ObservableList<String> ObList = FXCollections.observableArrayList(SexeL);
@@ -213,10 +179,11 @@ public class EtudiantController implements Initializable {
         addStudents_CNE.setText(studentD.getCNE());
         addStudents_nom.setText(studentD.getNom());
         addStudents_prenom.setText(studentD.getPrenom());
-        addStudents_sexe.setValue(studentD.getSexe());
+        addStudents_sexe.setValue(String.valueOf(studentD.getSexe()));
         addStudents_dateNaiss.setValue(LocalDate.parse(String.valueOf(studentD.getDateNaiss())));
-        addStudents_niv.setValue(studentD.getNiveau());
-        addStudents_classe.setText(studentD.getClasse());
+        addStudents_niv.setValue(String.valueOf(studentD.getCode_niveau()));
+        addStudents_classe.setText(String.valueOf(studentD.getId_classe()));
+        addStudent_parent.setText(String.valueOf(studentD.getId_parent()));
 
 
     }
@@ -227,14 +194,15 @@ public class EtudiantController implements Initializable {
          String prenom = addStudents_prenom.getText();
          String sexe = (String) addStudents_sexe.getSelectionModel().getSelectedItem();
          Date dateNaiss = Date.valueOf(addStudents_dateNaiss.getValue());
-         String niveau = (String) addStudents_niv.getSelectionModel().getSelectedItem();
-         String classe = addStudents_classe.getText();
-       if(EtudiantModel.AjouterEtudiant(cne,nom,prenom,sexe,dateNaiss,niveau,classe)) {
+         String code_niveau = (String) addStudents_niv.getSelectionModel().getSelectedItem();
+        int id_classe = Integer.parseInt(addStudents_classe.getText());
+        int id_parent = Integer.parseInt(addStudent_parent.getText());
+       if(EtudiantModel.AjouterEtudiant(cne,nom,prenom,sexe,dateNaiss,code_niveau,id_classe,id_parent)) {
             // TO BECOME UPDATED OUR TABLEVIEW ONCE THE DATA WE GAVE SUCCESSFUL
             addStudentsShowListData();
             // TO CLEAR THE TEXT FIELDS
            //availableCourseClear();
-           addStudentsSearch();
+
         }
        else{
            System.out.println("Couldnt add a new student!!!");
@@ -249,9 +217,8 @@ public class EtudiantController implements Initializable {
         addStudents_prenom.setText("");
         addStudents_nom.setText("");
         addStudents_classe.setText("");
-        addStudents_massar.setText("");
         addStudents_dateNaiss.setValue(null);
-        addStudentsSearch();
+
     }
 
     public void addStudentsUpdate() {
@@ -261,13 +228,13 @@ public class EtudiantController implements Initializable {
         String sexe = (String) addStudents_sexe.getSelectionModel().getSelectedItem();
         Date dateNaiss = Date.valueOf(addStudents_dateNaiss.getValue());
         String niveau = (String) addStudents_niv.getSelectionModel().getSelectedItem();
-        String classe = addStudents_classe.getText();
-        if(EtudiantModel.UpdateEtudiant(cne,nom,prenom,sexe,dateNaiss,niveau,classe)){
+        int id_classe = Integer.parseInt(addStudents_classe.getText());
+        if(EtudiantModel.UpdateEtudiant(cne,nom,prenom,sexe,dateNaiss,niveau,id_classe)){
             // TO UPDATE THE TABLEVIEW
             addStudentsShowListData();
             // TO CLEAR THE FIELDS
             addStudentsClear();
-            addStudentsSearch();
+
         } else {
             System.out.println("Failed To Update ... returns false");
         }
@@ -284,7 +251,7 @@ public class EtudiantController implements Initializable {
             addStudentsShowListData();
             // TO CLEAR THE FIELDS
             addStudentsClear();
-            addStudentsSearch();
+
         } else {
             System.out.println("Failed To Delete ... returns false");
         }
@@ -294,12 +261,21 @@ public class EtudiantController implements Initializable {
 
 
 
-
-
-    public void exit(ActionEvent e ){
-        System.exit(0);
+    public void Search(){
+        String query = addStudents_search.getText().toLowerCase();
+        addStudents_tableView.setItems(addStudentsListD.filtered(person -> person.getNom().toLowerCase().contains(query)
+                || person.getCode_niveau().toLowerCase().contains(query)
+                || person.getPrenom().toLowerCase().contains(query)
+                || person.getSexe().toLowerCase().contains(query)
+                || person.getCNE().toLowerCase().contains(query)
+                || person.getDateNaiss().toString().contains(query)
+        ));
     }
 
+    public void exit(ActionEvent e ){
+        Stage stage = (Stage) Mbtn.getScene().getWindow();
+        stage.close();
+    }
     public void minimize(ActionEvent e){
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.setIconified(true);
@@ -311,7 +287,6 @@ public class EtudiantController implements Initializable {
         addStudentsShowListData();
         addStudentsYearList();
         addStudentsSexeList();
-        addStudentsSearch();
         Xbtn.setStyle("-fx-background-color: null;");
         Mbtn.setStyle("-fx-background-color: null;");
     }

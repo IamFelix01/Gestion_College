@@ -10,15 +10,9 @@ public class EnseignantModel {
     private  static PreparedStatement prepare;
     private static Connection connect;
     //AJOUTER ENSEIGNANT
-    public static void AjouterEnseignant(int id_prof,String nom,String prenom,String sexe,int contact,String code_cours,String code_niveau){
+    public static void AjouterEnseignant(int id_prof,String nom,String prenom,String sexe,int contact,int id_cours,int id_classe){
 
-        String insertData = "INSERT INTO Enseignant (id_prof, nom,prenom, sexe, Contact, code_cours, code_niveau) VALUES(?,?,?,?,?,?,?)";
-//        try{
-//            conn = Connexion.getConnection();
-//
-//        }catch(SQLException e ){
-//            System.out.println("ECHEC PENDENT L'ADDITION D'UN NEVEAU ENSEIGNANT "+e.getMessage());
-//        }
+        String insertData = "INSERT INTO Enseignant (id_prof, nom,prenom, sexe, Contact, id_cours, id_classe) VALUES(?,?,?,?,?,?,?)";
         try {
             connect = Connexion.getConnection();
             Alert alert;
@@ -26,8 +20,8 @@ public class EnseignantModel {
             if (id_prof==0
                     || nom==null
                     || prenom==null
-                    || code_cours == null
-                    || code_niveau == null
+                    || id_cours == 0
+                    || id_classe == 0
                     || sexe == null
                     || contact == 0) {
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -54,8 +48,8 @@ public class EnseignantModel {
                     prepare.setString(3, prenom);
                     prepare.setString(4,sexe);
                     prepare.setInt(5, contact);
-                    prepare.setString(6, code_cours);
-                    prepare.setString(7, code_niveau);
+                    prepare.setInt(6, id_cours);
+                    prepare.setInt(7, id_classe);
 
                     prepare.executeUpdate();
 
@@ -79,15 +73,15 @@ public class EnseignantModel {
 
     }
     //UPDATE ENSEIGNANT
-    public static boolean UpdateEnseignant(int id_prof,String nom,String prenom,String sexe,int contact,String code_cours,String code_niveau){
+    public static boolean UpdateEnseignant(int id_prof,String nom,String prenom,String sexe,int contact,int id_cours,int id_classe){
         try {
             connect = Connexion.getConnection();
             Alert alert;
             if (id_prof==0
                     || nom==null
                     || prenom==null
-                    || code_cours == null
-                    || code_niveau == null
+                    || id_cours == 0
+                    || id_classe == 0
                     || sexe == null
                     || contact == 0){
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -103,11 +97,11 @@ public class EnseignantModel {
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if (option.isPresent() && option.get().equals(ButtonType.OK)) {
-                    prepare = connect.prepareStatement("Update enseignant set nom=?, prenom=? , code_cours=?, code_niveau=?, contact=?, sexe=? where id_prof=?");
+                    prepare = connect.prepareStatement("Update enseignant set nom=?, prenom=? , id_cours=?, id_classe=?, contact=?, sexe=? where id_prof=?");
                     prepare.setString(1,nom);
                     prepare.setString(2,prenom);
-                    prepare.setString(3,code_cours);
-                    prepare.setString(4,code_niveau);
+                    prepare.setInt(3,id_cours);
+                    prepare.setInt(4,id_classe);
                     prepare.setInt( 5,contact);
                     prepare.setString( 6,sexe);
                     prepare.setInt( 7,id_prof);

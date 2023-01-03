@@ -13,7 +13,7 @@
     <children>
         <AnchorPane layoutX="59.0" prefHeight="324.0" prefWidth="1030.0">
             <children>
-                <TextField layoutX="105.0" layoutY="22.0" promptText="search" />
+                <TextField fx:id="SearchField" layoutX="105.0" layoutY="22.0" onAction="#Search" promptText="search" />
 <!--                <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />-->
                 <TableView fx:id="addProfs_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addProfsSelect" prefHeight="200.0" prefWidth="931.0">
                     <columns>
@@ -22,8 +22,8 @@
                         <TableColumn fx:id="addProfs_col_firstName" prefWidth="136.0" text="prenom" />
                         <TableColumn fx:id="addProfs_col_gender" minWidth="0.0" prefWidth="111.0" text="Sexe" />
                         <TableColumn fx:id="addProfs_col_Contact" minWidth="0.0" prefWidth="147.0" text="Contact" />
-                        <TableColumn fx:id="addProfs_col_classe" minWidth="0.0" prefWidth="132.0" text="Classe" />
-                        <TableColumn fx:id="addProfs_col_matiere" minWidth="0.0" prefWidth="192.0" text="Matiere" />
+                        <TableColumn fx:id="addProfs_col_classe" minWidth="0.0" prefWidth="132.0" text="ID Classe" />
+                        <TableColumn fx:id="addProfs_col_Idcours" minWidth="0.0" prefWidth="192.0" text="ID Cours" />
                     </columns>
                 </TableView>
                 <Button fx:id="Xbtn" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" text="X">
@@ -41,7 +41,6 @@
                   <Font name="Elephant" size="32.0" />
                </font>
             </Label>
-            <Button layoutX="268.0" layoutY="22.0" mnemonicParsing="false" text="Search" />
             </children>
         </AnchorPane>
         <Label layoutX="68.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="ID Prof" />
@@ -51,7 +50,7 @@
         <Label layoutX="68.0" layoutY="429.0" prefHeight="18.0" prefWidth="71.0" text="prenom:" />
         <TextField fx:id="addProfs_prenom" layoutX="151.0" layoutY="426.0" />
         <Label layoutX="352.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="Contact : " />
-        <Label layoutX="352.0" layoutY="379.0" prefHeight="18.0" prefWidth="71.0" text="Classe:" />
+        <Label layoutX="352.0" layoutY="379.0" prefHeight="18.0" prefWidth="71.0" text="ID Classe:" />
         <TextField fx:id="addProfs_classe" layoutX="435.0" layoutY="376.0" />
         <Label layoutX="352.0" layoutY="431.0" prefHeight="18.0" prefWidth="71.0" text="Sexe :" />
         <ComboBox fx:id="addProfs_sexe" layoutX="435.0" layoutY="428.0" onAction="#addProfsSexeList" prefWidth="150.0" />
@@ -59,15 +58,15 @@
          <font>
             <Font name="Elephant" size="12.0" />
          </font></Button>
-        <Label layoutX="633.0" layoutY="367.0" prefHeight="18.0" prefWidth="71.0" text="Matiere :" />
-        <TextField fx:id="addProfs_matiere" layoutX="716.0" layoutY="364.0" />
+        <Label layoutX="624.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="ID Cours" />
+        <TextField fx:id="addProfs_idcours" layoutX="684.0" layoutY="330.0" />
         <Button layoutX="652.0" layoutY="439.0" mnemonicParsing="false" onAction="#addProfsClear" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #8B8B8B;" text="Vider" textFill="#fcfcfc" />
         <Button layoutX="851.0" layoutY="439.0" mnemonicParsing="false" onAction="#addProfsUpdate" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #EFD033;" text="Update" textFill="WHITE">
          <font>
             <Font name="Elephant" size="12.0" />
          </font></Button>
         <TextField fx:id="addProfs_contact" layoutX="435.0" layoutY="330.0" />
-      <Button layoutX="748.0" layoutY="439.0" onAction="#DeleteEnseignant" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+      <Button layoutX="748.0" layoutY="439.0" mnemonicParsing="false" onAction="#DeleteEnseignant" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Elephant" size="12.0" />
          </font>

@@ -20,8 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HomeController  implements Initializable {
-    public Button emploi;
+public class EspaceEtudiantController  implements Initializable {
     private Stage stage;
     private Scene scene;
     private double xOffset = 0;
@@ -50,13 +49,37 @@ public class HomeController  implements Initializable {
     @FXML
     private Button etudiantBtn;
 
+    public void ToEmploi(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Emploi.fxml"));
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+
+        root.setOnMousePressed((MouseEvent event) -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+
+        root.setOnMouseDragged((MouseEvent event) -> {
+            stage.setX(event.getScreenX() - x);
+            stage.setY(event.getScreenY() - y);
+        });
+
+        stage.initStyle(StageStyle.TRANSPARENT);
+
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
     public void ToEtu(ActionEvent e) throws IOException {
         //etudiantBtn.getScene().getWindow().hide();
 
-        Parent root = FXMLLoader.load(getClass().getResource("Etudiant.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("InfoEtudiant.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+
 
         root.setOnMousePressed((MouseEvent event) ->{
             x = event.getSceneX();
@@ -97,32 +120,11 @@ public class HomeController  implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public void ToEmploi(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Emploi.fxml"));
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
 
-        root.setOnMousePressed((MouseEvent event) -> {
-            x = event.getSceneX();
-            y = event.getSceneY();
-        });
-
-        root.setOnMouseDragged((MouseEvent event) -> {
-            stage.setX(event.getScreenX() - x);
-            stage.setY(event.getScreenY() - y);
-        });
-
-        stage.initStyle(StageStyle.TRANSPARENT);
-
-        stage.setScene(scene);
-        stage.show();
-
-    }
     public void ToNiv(ActionEvent e) throws IOException {
         //etudiantBtn.getScene().getWindow().hide();
 
-        Parent root = FXMLLoader.load(getClass().getResource("Niveau.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Changement.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
@@ -142,8 +144,6 @@ public class HomeController  implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
 
     public void ToSalle(ActionEvent e) throws IOException {
         //etudiantBtn.getScene().getWindow().hide();
@@ -168,29 +168,7 @@ public class HomeController  implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public void ToAbsence(ActionEvent e) throws IOException {
-        //etudiantBtn.getScene().getWindow().hide();
 
-        Parent root = FXMLLoader.load(getClass().getResource("GestionAbsence.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-
-        root.setOnMousePressed((MouseEvent event) ->{
-            x = event.getSceneX();
-            y = event.getSceneY();
-        });
-
-        root.setOnMouseDragged((MouseEvent event) ->{
-            stage.setX(event.getScreenX() - x);
-            stage.setY(event.getScreenY() - y);
-        });
-
-        stage.initStyle(StageStyle.TRANSPARENT);
-
-        stage.setScene(scene);
-        stage.show();
-    }
     public void ToCours(ActionEvent e) throws IOException {
         //etudiantBtn.getScene().getWindow().hide();
 

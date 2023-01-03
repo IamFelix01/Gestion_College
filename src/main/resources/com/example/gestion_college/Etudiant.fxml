@@ -15,17 +15,18 @@
     <children>
         <AnchorPane prefHeight="324.0" prefWidth="1030.0">
             <children>
-                <TextField fx:id="addStudents_search" layoutX="105.0" layoutY="22.0" onKeyTyped="#addStudentsSearch" promptText="search" />
+                <TextField fx:id="addStudents_search" layoutX="105.0" layoutY="22.0" onKeyTyped="#Search" promptText="search" />
 <!--                <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />-->
-                <TableView fx:id="addStudents_tableView" layoutX="41.0" layoutY="71.0" onMouseClicked="#addStudentsSelect" prefHeight="200.0" prefWidth="931.0">
+                <TableView fx:id="addStudents_tableView" layoutX="22.0" layoutY="71.0" onMouseClicked="#addStudentsSelect" prefHeight="200.0" prefWidth="997.0">
                     <columns>
-                        <TableColumn fx:id="addStudents_col_cne" prefWidth="163.0" text="CNE" />
-                        <TableColumn fx:id="addStudents_col_lastName" prefWidth="112.0" text="Nom" />
-                        <TableColumn fx:id="addStudents_col_firstName" prefWidth="122.0" text="Prenom" />
-                        <TableColumn fx:id="addStudents_col_birth" prefWidth="176.0" text="Date De Naissanece" />
-                        <TableColumn fx:id="addStudents_col_gender" minWidth="0.0" prefWidth="100.0" text="Sexe" />
-                        <TableColumn fx:id="addStudents_col_niv" minWidth="0.0" prefWidth="125.0" text="Niveau" />
-                        <TableColumn fx:id="addStudents_col_classe" minWidth="0.0" prefWidth="132.0" text="Classe" />
+                        <TableColumn fx:id="addStudents_col_cne" prefWidth="111.0" text="CNE" />
+                        <TableColumn fx:id="addStudents_col_lastName" prefWidth="111.0" text="Nom" />
+                        <TableColumn fx:id="addStudents_col_firstName" prefWidth="137.0" text="Prenom" />
+                        <TableColumn fx:id="addStudents_col_birth" prefWidth="154.0" text="Date De Naissanece" />
+                        <TableColumn fx:id="addStudents_col_gender" minWidth="0.0" prefWidth="98.0" text="Sexe" />
+                        <TableColumn fx:id="addStudents_col_niv" minWidth="0.0" prefWidth="187.0" text="Niveau" />
+                        <TableColumn fx:id="addStudents_col_classe" minWidth="0.0" prefWidth="92.0" text="Classe" />
+                  <TableColumn fx:id="addStudent_col_Parent" prefWidth="115.0" text="Parent" />
                     </columns>
                 </TableView>
                 <Button fx:id="Xbtn" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" text="X">
@@ -38,7 +39,6 @@
                         <Font name="System Bold" size="33.0" />
                     </font>
                 </Button>
-                <Button layoutX="273.0" layoutY="20.0" mnemonicParsing="false" onAction="#addStudentsSearch" text="Button" />
             <Text layoutX="413.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Etudiants">
                <font>
                   <Font name="Elephant" size="32.0" />
@@ -69,10 +69,12 @@
             <font>
                 <Font name="Elephant" size="12.0" />
             </font></Button>
-        <Button layoutX="734.0" onAction="#DeleteEtudiant" layoutY="439.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+        <Button layoutX="734.0" layoutY="439.0" mnemonicParsing="false" onAction="#DeleteEtudiant" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
             <font>
                 <Font name="Elephant" size="12.0" />
             </font>
         </Button>
+      <TextField fx:id="addStudent_parent" layoutX="777.0" layoutY="367.0" />
+      <Label layoutX="701.0" layoutY="371.0" text="Parent" />
     </children>
 </AnchorPane>

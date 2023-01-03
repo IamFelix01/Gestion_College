@@ -29,13 +29,53 @@ insert into classe values(1,'Classe1','3eme');]]></console>
       <console name="Connection 1" type="STANDARD" schema="gestioncollege" session="Main"><![CDATA[use gestioncollege;
 select * from classe;
 insert into classe values(2,'classe2','6eme');
-select * from niveau;]]></console>
+select * from niveau;
+drop table salle;
+create table ligne(id int primary key,materiel varchar(20),idSalle int);
+create table cours(id_cours int primary key,nom varchar(20),heurDebut int,heurFin int,id_prof int,id_classe int,id_salle int);
+select * from cours;
+insert into cours values(1,'math',7,10,1,2,3)]]></console>
     </connection>
     <connection id="c9b896a0-1dcd-4da0-a0db-77ee9a4b4a4e">
       <console name="Connection 2" type="STANDARD" schema="mysql" session="Main" />
     </connection>
     <connection id="0e3a9883-dc2d-446a-ad3d-21851087ff65">
-      <console name="Connection 3" type="STANDARD" schema="mysql" session="Main" />
+      <console name="Connection 3" type="STANDARD" schema="gestioncollege" session="Main"><![CDATA[use gestioncollege;
+select * from Ligne;
+desc Ligne;
+select * from salle;
+create table demandes(id int primary key,nom varchar(20),prenom varchar(20),age int,niveau varchar(20));
+select count(*) from demandes;
+desc demandes;
+alter table demandes modify id int not null;
+Insert into demandes(nom,prenom,age,niveau,email) values('SS','AS',12,'AS','ASA');
+SELECT count(*) from etudiant where code_niveau = '4eme';
+Insert into demandes(nom,prenom,age,niveau,email) values('as2as','asa3s',12,'ss','sss');
+delete from demandes where 1=1;
+alter table demandes modify id int not null AUTO_INCREMENT;
+alter table demandes add column email varchar(20);
+alter table etudiant modify rename(Classe,id_classe);
+alter table etudiant drop column niveau;
+alter table etudiant add column code_niveau varchar(20);
+alter table etudiant add constraint et_classe foreign key(id_classe) references classe(id_classe);
+alter table etudiant add constraint et_niveau foreign key(code_niveau) references niveau(code_niveau);
+alter table classe add constraint cll_niveau foreign key(code_niveau) references niveau(code_niveau); 
+alter table enseignant add constraint ens_cours foreign key(code_niveau) references niveau(code_niveau);
+alter table enseignant Rename column code_Cours to id_cours;
+select * from etudiant;
+delete from etudiant where 1=1;
+select * from classe;
+alter table enseignant modify id_cours int;
+alter table ligne add constraint li_salle foreign key(idSalle) references salle(id_salle);
+alter table enseignant add constraint ens2_cours foreign key(id_cours) references cours(id_cours);
+alter table cours add constraint crs_salle foreign key(id_salle) references salle(id_salle);
+alter table user modify isAdmin boolean default 0;
+select * from user;
+Create table absence(id_absence int primary key,CNE varchar(20),num_semaine int,id_cours int,estJustifie varchar(20));
+
+alter table absence add constraint ab_cne foreign key(CNE) references etudiant(cne);
+desc absence;
+drop table absence;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -50,6 +90,7 @@ select * from niveau;]]></console>
     <filter-actions connection-id="ec4b9821-2a0b-4d03-9443-0213b6b30316" dataset="mysql.user" active-filter-id="" />
     <filter-actions connection-id="ec4b9821-2a0b-4d03-9443-0213b6b30316" dataset="gestioncollege.user" active-filter-id="" />
     <filter-actions connection-id="6238d6fa-13d4-48b3-95cb-48720fa428fa" dataset="gestioncollege.enseignant" active-filter-id="" />
+    <filter-actions connection-id="0e3a9883-dc2d-446a-ad3d-21851087ff65" dataset="gestioncollege.ligne" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

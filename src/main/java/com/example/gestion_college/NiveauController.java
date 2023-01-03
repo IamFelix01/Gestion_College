@@ -223,10 +223,10 @@ public class NiveauController implements Initializable {
         }
     }
 
-    private final String[] niveauList = {"1ERE", "2EME", "3EME"};
+
 
     public void NiveauList() {
-
+        String[] niveauList = {"3EME", "4EME", "5EME","6EME"};
         List<String> nivList = new ArrayList<>(Arrays.asList(niveauList));
 
         ObservableList<String> ObList = FXCollections.observableArrayList(nivList);
@@ -237,9 +237,9 @@ public class NiveauController implements Initializable {
 
 
     public void exit(ActionEvent e ){
-        System.exit(0);
+        Stage stage = (Stage) Xbtn.getScene().getWindow();
+        stage.close();
     }
-
     public void minimize(ActionEvent e){
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.setIconified(true);

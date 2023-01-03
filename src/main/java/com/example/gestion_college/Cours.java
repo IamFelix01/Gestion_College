@@ -4,57 +4,46 @@ import java.util.ArrayList;
 
 public class Cours {
 
-    private int idCours;
-    Enseignant enseignant;
-    Salle salle;
-    Classe classe;
-    String nom;
+    private int id;
+    private String nom;
     private int heureDebut;
     private int heureFin;
+    private int id_classe;
+    private int id_salle;
+    private int jour;
+
+
     ArrayList<Cours> courss = new ArrayList<Cours>();
 
-    public Cours(int idCours, Enseignant enseignant, Salle salle, Classe classe, String nom, int heureDebut, int heureFin) {
-        this.idCours = idCours;
-        this.enseignant = enseignant;
-        this.salle = salle;
-        this.classe = classe;
+    public Cours(int id, String nom, int heureDebut, int heureFin, int id_classe, int id_salle,int jour) {
+        this.id = id;
         this.nom = nom;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
+        this.id_classe = id_classe;
+        this.id_salle = id_salle;
+        this.jour = jour;
     }
 
-    public int getIdCours() {
-        return idCours;
+    public int getJour() {
+        return jour;
     }
 
-    public void setIdCours(int idCours) {
-        this.idCours = idCours;
+    public int getId() {
+        return id;
     }
 
-    public Enseignant getEnseignant() {
-        return enseignant;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEnseignant(Enseignant enseignant) {
-        this.enseignant = enseignant;
+    public int getId_classe() {
+        return id_classe;
     }
 
-    public Salle getSalle() {
-        return salle;
+    public int getId_salle() {
+        return id_salle;
     }
-
-    public void setSalle(Salle salle) {
-        this.salle = salle;
-    }
-
-    public Classe getClasse() {
-        return classe;
-    }
-
-    public void setClasse(Classe classe) {
-        this.classe = classe;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -67,16 +56,19 @@ public class Cours {
         return heureDebut;
     }
 
-    public void setHeureDebut(int heureDebut) {
-        this.heureDebut = heureDebut;
-    }
 
     public int getHeureFin() {
         return heureFin;
     }
 
-    public void setHeureFin(int heureFin) {
-        this.heureFin = heureFin;
+
+
+    public ArrayList<Cours> getCourss() {
+        return courss;
+    }
+
+    public void setCourss(ArrayList<Cours> courss) {
+        this.courss = courss;
     }
 
     public void ajouterCours(Cours cours){

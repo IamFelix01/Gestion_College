@@ -8,26 +8,28 @@ public class Enseignant {
     private String nom;
     private String prenom;
     private String Sexe;
-    private String Contact;
-    private String Matiere;
-    private String Classe;
+    private int Contact;
+    private int id_cours;
+    private int id_classe;
 
     ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
-
+    public Enseignant(int id){
+        this.id = id;
+    }
     public Enseignant(int id, String nom, String prenom) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
     }
 
-    public Enseignant(int id, String nom, String prenom, String sexe, String contact, String matiere, String classe) {
+    public Enseignant(int id, String nom, String prenom, String sexe, int contact, int id_cours, int id_classe) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         Sexe = sexe;
-        Contact = contact;
-        Matiere = matiere;
-        Classe = classe;
+        this.Contact = contact;
+        this.id_classe = id_classe;
+        this.id_cours = id_cours;
     }
 
     public int getId() {
@@ -62,28 +64,17 @@ public class Enseignant {
         Sexe = sexe;
     }
 
-    public String getContact() {
+
+    public int getContact() {
         return Contact;
     }
 
-    public void setContact(String contact) {
-        Contact = contact;
+    public int getId_cours() {
+        return id_cours;
     }
 
-    public String getMatiere() {
-        return Matiere;
-    }
-
-    public void setMatiere(String matiere) {
-        Matiere = matiere;
-    }
-
-    public String getClasse() {
-        return Classe;
-    }
-
-    public void setClasse(String classe) {
-        Classe = classe;
+    public int getId_classe() {
+        return id_classe;
     }
 
     public ArrayList<Enseignant> getEnseignants() {

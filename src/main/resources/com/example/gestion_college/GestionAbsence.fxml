@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestion_college.AbsenceController">
+    <children>
+        <AnchorPane prefHeight="324.0" prefWidth="1030.0">
+            <children>
+                <TextField fx:id="absence_search" layoutX="105.0" layoutY="22.0" onKeyTyped="#Search" promptText="search" />
+<!--                <FontAwesomeIconView glyphName="SEARCH" layoutX="235.0" layoutY="39.0" size="1.5REM" />-->
+                <TableView fx:id="absence_tableView" layoutX="213.0" layoutY="73.0" onMouseClicked="#AbsenceSelect" prefHeight="200.0" prefWidth="685.0">
+                    <columns>
+                        <TableColumn fx:id="Absence_col_id" prefWidth="55.0" text="ID" />
+                        <TableColumn fx:id="Absence_col_semaine" prefWidth="136.0" text="Num Semaine" />
+                        <TableColumn fx:id="Absence_col_idcours" prefWidth="109.0" text="ID cours" />
+                        <TableColumn fx:id="Absence_col_cne" minWidth="0.0" prefWidth="114.0" text="CNE Etudiant" />
+                        <TableColumn fx:id="absence_col_justification" minWidth="0.0" prefWidth="142.0" text="Justification" />
+                    </columns>
+                </TableView>
+                <Button fx:id="Xbtn" layoutX="988.0" layoutY="7.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="X">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            <Text layoutX="413.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Absence">
+               <font>
+                  <Font name="Elephant" size="32.0" />
+               </font>
+            </Text>
+            <Button fx:id="Mbtn" layoutX="938.0" layoutY="-9.0" mnemonicParsing="false" onAction="#minimize" prefHeight="47.0" prefWidth="50.0" style="-fx-background-color: transparent;" text="_">
+               <font>
+                  <Font name="Arial Black" size="22.0" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+        <Label layoutX="68.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="ID" />
+        <TextField fx:id="absence_id" layoutX="151.0" layoutY="330.0" />
+        <Label layoutX="68.0" layoutY="379.0" prefHeight="18.0" prefWidth="85.0" text="Num semaine" />
+        <TextField fx:id="absence_numsemaine" layoutX="151.0" layoutY="376.0" />
+        <Label layoutX="68.0" layoutY="429.0" prefHeight="18.0" prefWidth="71.0" text="ID Cours" />
+        <TextField fx:id="absence_idcours" layoutX="151.0" layoutY="426.0" />
+        <Label layoutX="361.0" layoutY="333.0" prefHeight="18.0" prefWidth="71.0" text="Justification" />
+        <ComboBox fx:id="absence_justification" layoutX="440.0" layoutY="330.0" onAction="#absenceJustification" prefWidth="150.0" promptText="est Justifie?" />
+        <Button layoutX="934.0" layoutY="439.0" mnemonicParsing="false" onAction="#addAbsence" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #afd69b;" text="ADD" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font></Button>
+        <Button layoutX="630.0" layoutY="439.0" mnemonicParsing="false" onAction="#clear" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #8B8B8B;" text="Vider" textFill="#fcfcfc" />
+        <Button layoutX="838.0" layoutY="439.0" mnemonicParsing="false" onAction="#updateAbsence" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #EFD033;" text="Update" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font></Button>
+        <Button layoutX="734.0" layoutY="439.0" mnemonicParsing="false" onAction="#deleteAbsence" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #B22B27;" text="Delete" textFill="WHITE">
+            <font>
+                <Font name="Elephant" size="12.0" />
+            </font>
+        </Button>
+      <Text layoutX="397.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Label layoutX="362.0" layoutY="371.0" text="CNE Etudiant" />
+      <Label layoutX="383.0" layoutY="405.0" />
+      <TextField fx:id="absence_cne" layoutX="441.0" layoutY="367.0" />
+    </children>
+</AnchorPane>
