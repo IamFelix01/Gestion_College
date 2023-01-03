@@ -14,4 +14,4 @@ absences des élèves, L'interface graphique est developpé par JavaFx.
 ## Les membres du groupe :
 AMINA BIKANIMINE
 BOULAHIA Abdelfattah 
-Said
+Said BENCHAD
