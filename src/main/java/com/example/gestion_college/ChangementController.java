@@ -120,7 +120,7 @@ public class ChangementController implements Initializable {
 
         // Set the authentication credentials
         final String username = "fabdel437@gmail.com";
-        final String password = "jjlekknbmconxxlk";
+        final String password = "";
 
         // Create a session with the email properties and authentication credentials
         Session session = Session.getInstance(props,
